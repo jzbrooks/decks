@@ -1,0 +1,3 @@
+[submodule "storyboard"]
+	path = storyboard
+	url = git@github.com:bnorm/storyboard.git
