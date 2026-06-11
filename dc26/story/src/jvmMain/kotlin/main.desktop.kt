@@ -10,7 +10,7 @@ fun main() {
     application {
         MaterialTheme(colors = darkColors()) {
             DesktopEasel {
-                createStoryboard(includeTextFieldSamples = true)
+                createStoryboard()
             }
         }
     }

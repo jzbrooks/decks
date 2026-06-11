@@ -4,7 +4,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.window.ComposeViewport
-import dev.bnorm.dcnyc25.createStoryboard
+import com.jzbrooks.dc26.createStoryboard
 import dev.bnorm.storyboard.easel.WebEasel
 
 @OptIn(ExperimentalComposeUiApi::class)
