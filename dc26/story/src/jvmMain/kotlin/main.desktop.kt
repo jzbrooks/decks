@@ -1,4 +1,4 @@
-package dev.bnorm.dcnyc25.story.desktop
+package com.jzbrooks.dc26.desktop
 
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors

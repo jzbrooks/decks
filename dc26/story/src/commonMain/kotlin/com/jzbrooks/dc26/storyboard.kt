@@ -1,11 +1,22 @@
 package com.jzbrooks.dc26
 
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Typography
-import androidx.compose.material.lightColors
-import androidx.compose.ui.graphics.Color
-import dev.bnorm.storyboard.ContentDecorator
+import com.jzbrooks.dc26.scenes.BakeTransformations
+import com.jzbrooks.dc26.scenes.Closing
+import com.jzbrooks.dc26.scenes.CommandVariant
+import com.jzbrooks.dc26.scenes.Conversion
+import com.jzbrooks.dc26.scenes.CurvesToArcs
+import com.jzbrooks.dc26.scenes.DecompileApk
+import com.jzbrooks.dc26.scenes.Hobby
+import com.jzbrooks.dc26.scenes.HowGraphicsWork
+import com.jzbrooks.dc26.scenes.HowPathsWork
+import com.jzbrooks.dc26.scenes.MergePaths
+import com.jzbrooks.dc26.scenes.OptimizationCategories
+import com.jzbrooks.dc26.scenes.Pipeline
+import com.jzbrooks.dc26.scenes.SimplifyCommands
+import com.jzbrooks.dc26.scenes.Title
+import com.jzbrooks.dc26.scenes.Vat
+import com.jzbrooks.dc26.scenes.WhatIsVgo
+import com.jzbrooks.dc26.theme.VgoTheme
 import dev.bnorm.storyboard.SceneFormat
 import dev.bnorm.storyboard.Storyboard
 import dev.bnorm.storyboard.layout.template.section
@@ -14,27 +25,42 @@ fun createStoryboard(): Storyboard {
     return Storyboard.build(
         title = "vgo: A Vector Optimizer Built Like a Compiler",
         format = SceneFormat.Default,
-        decorator = theme,
+        decorator = VgoTheme,
     ) {
         Title()
-    }
-}
 
-private val theme = ContentDecorator { content ->
-    val colors = lightColors(
-        background = Color.White,
-        surface = Color(0xFFF7F5FF),
-        onBackground = Color(0xFFF7F5FF),
-        primary = Color(0xFFC9A8FF),
-        primaryVariant = Color(0xA8B8FF),
-        secondary = Color(0xFF90C8FF),
-    )
-
-    val typography = Typography()
-
-    MaterialTheme(colors, typography) {
-        Surface {
-            content()
+        section("Origins") {
+            Hobby()
         }
+
+        section("What is vgo?") {
+            WhatIsVgo()
+            HowGraphicsWork()
+        }
+
+        section("How paths work") {
+            HowPathsWork()
+        }
+
+        section("Optimization") {
+            OptimizationCategories()
+            Pipeline()
+            CommandVariant()
+            BakeTransformations()
+            MergePaths()
+            SimplifyCommands()
+            CurvesToArcs()
+        }
+
+        section("Conversion") {
+            Conversion()
+            DecompileApk()
+        }
+
+        section("Extras") {
+            Vat()
+        }
+
+        Closing()
     }
 }
