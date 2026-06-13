@@ -36,7 +36,7 @@ import kotlin.math.sqrt
 
 fun StoryboardBuilder.HowGraphicsWork() {
     scene(
-        frameCount = 3,
+        frameCount = 4,
         enterTransition = SceneEnter(alignment = Alignment.CenterEnd),
         exitTransition = SceneExit(alignment = Alignment.CenterEnd),
     ) {
@@ -101,6 +101,9 @@ fun StoryboardBuilder.HowGraphicsWork() {
                                 }
                             }
                         }
+                        item(index = 3) {
+                            Caption("scaling rasters resamples fixed data — zoom in and you get blur or blocks;\nantialiasing softens edges that were never precisely defined")
+                        }
                     }
                 }
             }
@@ -108,8 +111,9 @@ fun StoryboardBuilder.HowGraphicsWork() {
     }
 }
 
-private const val SAMPLES = 16
-private const val RADIUS_CELLS = 6.2f
+private const val SAMPLES = 256
+private const val RADIUS_CELLS = 99.2f
+private const val MAX_ZOOM = 6f
 
 @androidx.compose.runtime.Composable
 private fun RasterCircle(zoom: Float) {
@@ -120,9 +124,11 @@ private fun RasterCircle(zoom: Float) {
             .background(VgoColors.Surface)
     ) {
         val cell = size.width / SAMPLES * zoom
+        val t = (zoom - 1f) / (MAX_ZOOM - 1f)
+        val diag = RADIUS_CELLS / sqrt(2f)
         val origin = Offset(
-            size.width / 2f - SAMPLES / 2f * cell,
-            size.height / 2f - SAMPLES / 2f * cell,
+            size.width / 2f - (SAMPLES / 2f + diag * t) * cell,
+            size.height / 2f - (SAMPLES / 2f - diag * t) * cell,
         )
         for (row in 0 until SAMPLES) {
             for (column in 0 until SAMPLES) {
@@ -166,8 +172,15 @@ private fun VectorCircle(zoom: Float) {
             .clip(RoundedCornerShape(16.dp))
             .background(VgoColors.Surface)
     ) {
-        val radius = size.width / SAMPLES * RADIUS_CELLS * zoom
-        drawCircle(VgoColors.PathFill, radius, center)
-        drawCircle(VgoColors.Azure, radius, center, style = Stroke(3.dp.toPx()))
+        val cell = size.width / SAMPLES * zoom
+        val t = (zoom - 1f) / (MAX_ZOOM - 1f)
+        val diag = RADIUS_CELLS / sqrt(2f)
+        val radius = RADIUS_CELLS * cell
+        val circleCenter = Offset(
+            size.width / 2f - diag * t * cell,
+            size.height / 2f + diag * t * cell,
+        )
+        drawCircle(VgoColors.PathFill, radius, circleCenter)
+        drawCircle(VgoColors.Azure, radius, circleCenter, style = Stroke(3.dp.toPx()))
     }
 }
