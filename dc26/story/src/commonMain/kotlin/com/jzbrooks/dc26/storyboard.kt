@@ -5,8 +5,10 @@ import com.jzbrooks.dc26.scenes.Closing
 import com.jzbrooks.dc26.scenes.CommandVariant
 import com.jzbrooks.dc26.scenes.Conversion
 import com.jzbrooks.dc26.scenes.CurvesToArcs
+import com.jzbrooks.dc26.scenes.CurvesToArcsAlgorithm
 import com.jzbrooks.dc26.scenes.DecompileApk
 import com.jzbrooks.dc26.scenes.Hobby
+import com.jzbrooks.dc26.scenes.VgoHistory
 import com.jzbrooks.dc26.scenes.HowGraphicsWork
 import com.jzbrooks.dc26.scenes.HowPathsWork
 import com.jzbrooks.dc26.scenes.MergePaths
@@ -14,6 +16,7 @@ import com.jzbrooks.dc26.scenes.OptimizationCategories
 import com.jzbrooks.dc26.scenes.Pipeline
 import com.jzbrooks.dc26.scenes.SimplifyCommands
 import com.jzbrooks.dc26.scenes.Title
+import com.jzbrooks.dc26.scenes.UsingVgo
 import com.jzbrooks.dc26.scenes.Vat
 import com.jzbrooks.dc26.scenes.WhatIsVgo
 import com.jzbrooks.dc26.theme.VgoTheme
@@ -31,6 +34,7 @@ fun createStoryboard(): Storyboard {
 
         section("Origins") {
             Hobby()
+            VgoHistory()
         }
 
         section("What is vgo?") {
@@ -50,11 +54,16 @@ fun createStoryboard(): Storyboard {
             MergePaths()
             SimplifyCommands()
             CurvesToArcs()
+            CurvesToArcsAlgorithm()
         }
 
         section("Conversion") {
             Conversion()
             DecompileApk()
+        }
+
+        section("Using vgo") {
+            UsingVgo()
         }
 
         section("Extras") {
