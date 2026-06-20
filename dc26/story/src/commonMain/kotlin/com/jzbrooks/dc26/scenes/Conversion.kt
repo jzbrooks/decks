@@ -43,6 +43,8 @@ private val SVG = """
 
 private val VECTOR_DRAWABLE = """
     <vector
+        android:width="24dp"
+        android:height="24dp"
         android:viewportWidth="24"
         android:viewportHeight="24">
       <path
@@ -63,50 +65,49 @@ private val IMAGE_VECTOR = """
     }.build()
 """.trimIndent()
 
-fun StoryboardBuilder.Conversion() {
+fun StoryboardBuilder.Conversion(includeImageVector: Boolean) {
     scene(
-        frameCount = 4,
+        frameCount = if (includeImageVector) 3 else 2,
         enterTransition = SceneEnter(alignment = Alignment.CenterEnd),
         exitTransition = SceneExit(alignment = Alignment.CenterEnd),
     ) {
         SlideScaffold {
             val frame = transition.currentState.toValue()
 
-            Column(verticalArrangement = Arrangement.spacedBy(28.dp)) {
+            Column(verticalArrangement = Arrangement.spacedBy(56.dp)) {
                 Row(
                     Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(20.dp, Alignment.CenterHorizontally),
+                    horizontalArrangement = Arrangement.spacedBy(40.dp, Alignment.CenterHorizontally),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     OutlinedChip("SVG", color = if (frame == 0) VgoColors.Azure else VgoColors.Muted)
                     Text("⇄", style = MaterialTheme.typography.h3, color = VgoColors.Muted)
                     Box(
-                        if (frame >= 3) Modifier.border(3.dp, VgoGradient, RoundedCornerShape(12.dp))
+                        if (frame >= 3) Modifier.border(6.dp, VgoGradient, RoundedCornerShape(24.dp))
                         else Modifier
                     ) {
-                        GradientChip("IR", Modifier.padding(4.dp))
+                        GradientChip("IR", Modifier.padding(8.dp))
                     }
                     Text("⇄", style = MaterialTheme.typography.h3, color = VgoColors.Muted)
                     OutlinedChip("VectorDrawable", color = if (frame == 1) VgoColors.Azure else VgoColors.Muted)
-                    Text("·", style = MaterialTheme.typography.h3, color = VgoColors.Muted)
-                    OutlinedChip("ImageVector", color = if (frame == 2) VgoColors.Azure else VgoColors.Muted)
+                    if (includeImageVector) {
+                        Text("·", style = MaterialTheme.typography.h3, color = VgoColors.Muted)
+                        OutlinedChip("ImageVector", color = if (frame == 2) VgoColors.Azure else VgoColors.Muted)
+                    }
                 }
 
-                Box(Modifier.height(280.dp)) {
+                Box(Modifier.height(560.dp)) {
                     ProvideTextStyle(CodeTextStyle) {
                         val code = transition.createChildTransition {
                             when (it.toValue()) {
                                 0 -> SVG.style(DC26_XML)
                                 1 -> VECTOR_DRAWABLE.style(DC26_XML)
-                                else -> IMAGE_VECTOR.highlight(INTELLIJ_DARK, Language.Kotlin)
+                                else if includeImageVector -> IMAGE_VECTOR.highlight(INTELLIJ_DARK, Language.Kotlin)
+                                else -> VECTOR_DRAWABLE.style(DC26_XML)
                             }
                         }
                         MagicText(code)
                     }
-                }
-
-                if (frame >= 3) {
-                    Caption("one drawing, three dialects — every reader and writer meets in the same IR")
                 }
             }
         }

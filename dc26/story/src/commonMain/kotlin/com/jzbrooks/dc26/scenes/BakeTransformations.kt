@@ -68,10 +68,10 @@ fun StoryboardBuilder.BakeTransformations() {
             val frame = transition.currentState.toValue()
 
             Row(
-                horizontalArrangement = Arrangement.spacedBy(48.dp),
+                horizontalArrangement = Arrangement.spacedBy(96.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                Column(verticalArrangement = Arrangement.spacedBy(24.dp)) {
+                Column(verticalArrangement = Arrangement.spacedBy(48.dp)) {
                     ProvideTextStyle(CodeTextStyle) {
                         val xml = transition.createChildTransition {
                             (if (it.toValue() >= 1) AFTER_XML else BEFORE_XML).style(DC26_XML)
@@ -81,7 +81,7 @@ fun StoryboardBuilder.BakeTransformations() {
 
                     AnimatedVisibility(visible = frame >= 2, enter = fadeIn(), exit = fadeOut()) {
                         Row(
-                            horizontalArrangement = Arrangement.spacedBy(16.dp),
+                            horizontalArrangement = Arrangement.spacedBy(32.dp),
                             verticalAlignment = Alignment.CenterVertically,
                         ) {
                             ByteChip(BEFORE_XML.length, color = VgoColors.Amber)
@@ -94,15 +94,15 @@ fun StoryboardBuilder.BakeTransformations() {
 
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(12.dp),
+                    verticalArrangement = Arrangement.spacedBy(24.dp),
                 ) {
                     PathCanvas(
                         commands = BAKED,
                         viewport = Rect(0f, 0f, 24f, 24f),
                         fill = VgoColors.PathFill,
                         modifier = Modifier
-                            .size(300.dp)
-                            .clip(RoundedCornerShape(16.dp))
+                            .size(600.dp)
+                            .clip(RoundedCornerShape(32.dp))
                             .background(VgoColors.Surface),
                     )
                     Caption("the render never changes")

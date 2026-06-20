@@ -48,41 +48,41 @@ fun Terminal(
     title: String = "~ — zsh",
     content: @Composable ColumnScope.() -> Unit,
 ) {
-    val shape = RoundedCornerShape(12.dp)
+    val shape = RoundedCornerShape(24.dp)
     Column(
         modifier
-            .shadow(24.dp, shape)
+            .shadow(48.dp, shape)
             .clip(shape)
             .background(TerminalBackground)
     ) {
         Box(
             Modifier
                 .fillMaxWidth()
-                .height(34.dp)
+                .height(68.dp)
                 .background(TerminalTitlebar)
         ) {
             Row(
-                Modifier.align(Alignment.CenterStart).padding(start = 14.dp),
+                Modifier.align(Alignment.CenterStart).padding(start = 28.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 TrafficLight(Color(0xFFFF5F57))
-                Spacer(Modifier.size(8.dp))
+                Spacer(Modifier.size(16.dp))
                 TrafficLight(Color(0xFFFEBC2E))
-                Spacer(Modifier.size(8.dp))
+                Spacer(Modifier.size(16.dp))
                 TrafficLight(Color(0xFF28C840))
             }
             Text(
                 title,
                 color = TerminalTitleText,
-                fontSize = 13.sp,
+                fontSize = 26.sp,
                 modifier = Modifier.align(Alignment.Center),
             )
         }
 
         ProvideTextStyle(
-            TextStyle(fontFamily = JetBrainsMono, color = TerminalForeground, fontSize = 18.sp)
+            TextStyle(fontFamily = JetBrainsMono, color = TerminalForeground, fontSize = 36.sp, lineHeight = 52.sp)
         ) {
-            Column(Modifier.fillMaxWidth().padding(18.dp)) {
+            Column(Modifier.fillMaxWidth().padding(36.dp)) {
                 content()
             }
         }
@@ -114,7 +114,7 @@ fun <T> SceneScope<T>.TerminalPopup(
             Terminal(
                 modifier = Modifier
                     .fillMaxWidth(0.92f)
-                    .offset(y = 18.dp),
+                    .offset(y = 36.dp),
                 title = title,
                 content = content,
             )
@@ -124,5 +124,5 @@ fun <T> SceneScope<T>.TerminalPopup(
 
 @Composable
 private fun TrafficLight(color: Color) {
-    Box(Modifier.size(12.dp).background(color, CircleShape))
+    Box(Modifier.size(24.dp).background(color, CircleShape))
 }

@@ -1,4 +1,4 @@
-name: Publish Application on GitHub Pages
+name: Build Web
 
 on:
   push:
@@ -20,7 +20,7 @@ jobs:
           java-version: 25
 
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           submodules: recursive
 
@@ -35,28 +35,3 @@ jobs:
           chmod -v -R +rX "build/_site" | while read line; do
             echo "::warning title=Invalid file permissions automatically fixed::$line"
           done
-
-      # TODO: Integrate with GitHub Pages Artifacts
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: build/_site
-
-  deploy:
-    name: Deploy to GitHub Pages
-    needs: build
-
-    permissions:
-      pages: write
-      id-token: write
-
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4

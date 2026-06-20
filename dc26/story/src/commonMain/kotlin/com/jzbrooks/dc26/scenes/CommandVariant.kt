@@ -11,6 +11,7 @@ import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.ProvideTextStyle
 import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -27,7 +28,6 @@ import com.jzbrooks.dc26.template.Caption
 import com.jzbrooks.dc26.template.CodeTextStyle
 import com.jzbrooks.dc26.template.SlideScaffold
 import com.jzbrooks.dc26.theme.VgoColors
-import com.jzbrooks.dc26.vector.HorizontalTo
 import com.jzbrooks.dc26.vector.LineTo
 import com.jzbrooks.dc26.vector.MoveTo
 import com.jzbrooks.dc26.vector.PathCanvas
@@ -46,18 +46,11 @@ import dev.bnorm.storyboard.toValue
 
 private enum class Variant { Absolute, Relative, Compact }
 
-// A mountain ridge: drawn near the far corner of a 100×100 viewBox,
-// where absolute coordinates are expensive and deltas are cheap.
-private val RIDGE: List<PathCommand> = listOf(
-    MoveTo(Point(8f, 88f)),
-    LineTo(Point(28f, 46f)),
-    LineTo(Point(43f, 65f)),
-    LineTo(Point(61f, 22f)),
-    LineTo(Point(78f, 53f)),
-    LineTo(Point(92f, 35f)),
-    LineTo(Point(92f, 88f)),
-    HorizontalTo(8f),
-    com.jzbrooks.dc26.vector.Close,
+private val ZIGZAG: List<PathCommand> = listOf(
+    MoveTo(Point(10f, 10f)),
+    LineTo(Point(90f, 10f)),
+    LineTo(Point(10f, 90f)),
+    LineTo(Point(90f, 90f)),
 )
 
 fun StoryboardBuilder.CommandVariant() {
@@ -73,13 +66,13 @@ fun StoryboardBuilder.CommandVariant() {
             val variant = selection ?: Variant.entries[frame.coerceIn(0, Variant.entries.lastIndex)]
 
             val commands = when (variant) {
-                Variant.Absolute -> RIDGE.toAbsolute()
-                Variant.Relative -> RIDGE.toRelative()
-                Variant.Compact -> RIDGE.toCompact()
+                Variant.Absolute -> ZIGZAG.toAbsolute()
+                Variant.Relative -> ZIGZAG.toRelative()
+                Variant.Compact -> ZIGZAG.toCompact()
             }
 
             Row(
-                horizontalArrangement = Arrangement.spacedBy(48.dp),
+                horizontalArrangement = Arrangement.spacedBy(96.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 PathCanvas(
@@ -87,13 +80,13 @@ fun StoryboardBuilder.CommandVariant() {
                     viewport = Rect(0f, 0f, 100f, 100f),
                     fill = VgoColors.PathFill,
                     modifier = Modifier
-                        .size(320.dp)
-                        .clip(RoundedCornerShape(16.dp))
+                        .size(640.dp)
+                        .clip(RoundedCornerShape(32.dp))
                         .background(VgoColors.Surface),
                 )
 
-                Column(verticalArrangement = Arrangement.spacedBy(24.dp)) {
-                    Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                Column(verticalArrangement = Arrangement.spacedBy(48.dp)) {
+                    Row(horizontalArrangement = Arrangement.spacedBy(24.dp)) {
                         for (candidate in Variant.entries) {
                             VariantButton(
                                 candidate,
@@ -108,7 +101,7 @@ fun StoryboardBuilder.CommandVariant() {
                     }
 
                     Row(
-                        horizontalArrangement = Arrangement.spacedBy(16.dp),
+                        horizontalArrangement = Arrangement.spacedBy(32.dp),
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         ByteChip(commands.byteCount())
@@ -126,7 +119,7 @@ fun StoryboardBuilder.CommandVariant() {
     }
 }
 
-@androidx.compose.runtime.Composable
+@Composable
 private fun VariantButton(variant: Variant, selected: Boolean, onClick: () -> Unit) {
     Button(
         onClick = onClick,
@@ -136,6 +129,6 @@ private fun VariantButton(variant: Variant, selected: Boolean, onClick: () -> Un
         ),
         modifier = Modifier.pointerHoverIcon(PointerIcon.Hand),
     ) {
-        Text(variant.name)
+        Text(variant.name, style = MaterialTheme.typography.h4)
     }
 }

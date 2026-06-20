@@ -102,7 +102,7 @@ fun List<PathCommand>.toComposePath(upTo: Int = size): Path {
 
             is QuadTo -> {
                 val c = step.controls.single()
-                path.quadraticBezierTo(c.x, c.y, step.end.x, step.end.y)
+                path.quadraticTo(c.x, c.y, step.end.x, step.end.y)
             }
 
             is ArcTo -> path.addSvgArc(step.start, step.end, command)

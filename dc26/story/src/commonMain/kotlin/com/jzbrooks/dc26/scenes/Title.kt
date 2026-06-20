@@ -34,18 +34,18 @@ fun StoryboardBuilder.Title() {
         Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(28.dp),
+                verticalArrangement = Arrangement.spacedBy(56.dp),
             ) {
                 // The logo was drawn for a light background; give it its own card.
                 Box(
                     Modifier
-                        .background(Color.White, RoundedCornerShape(24.dp))
-                        .padding(horizontal = 48.dp, vertical = 24.dp)
+                        .background(Color.White, RoundedCornerShape(48.dp))
+                        .padding(horizontal = 96.dp, vertical = 48.dp)
                 ) {
                     Image(
                         painterResource(Res.drawable.vgo),
                         contentDescription = "vgo logo",
-                        modifier = Modifier.width(280.dp),
+                        modifier = Modifier.width(560.dp),
                     )
                 }
 

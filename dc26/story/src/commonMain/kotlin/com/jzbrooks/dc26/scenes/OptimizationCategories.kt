@@ -43,8 +43,8 @@ fun StoryboardBuilder.OptimizationCategories() {
         exitTransition = SceneExit(alignment = Alignment.CenterEnd),
     ) {
         SlideScaffold {
-            Column(verticalArrangement = Arrangement.spacedBy(40.dp)) {
-                Row(horizontalArrangement = Arrangement.spacedBy(32.dp)) {
+            Column(verticalArrangement = Arrangement.spacedBy(80.dp)) {
+                Row(horizontalArrangement = Arrangement.spacedBy(64.dp)) {
                     CategoryCard(
                         title = "IR optimizations",
                         subtitle = "restructure the drawing",
@@ -65,14 +65,14 @@ fun StoryboardBuilder.OptimizationCategories() {
                 Column(
                     Modifier.fillMaxWidth(),
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(32.dp),
                 ) {
                     ProvideTextStyle(CodeTextStyle.copy(fontSize = MaterialTheme.typography.h3.fontSize)) {
                         val text = transition.createChildTransition { AnnotatedString(it.toValue().text) }
                         MagicText(text)
                     }
                     Row(
-                        horizontalArrangement = Arrangement.spacedBy(16.dp),
+                        horizontalArrangement = Arrangement.spacedBy(32.dp),
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         ByteChip(step.text.length)
@@ -94,10 +94,10 @@ private fun CategoryCard(
 ) {
     Column(
         modifier
-            .border(2.dp, color.copy(alpha = 0.6f), RoundedCornerShape(16.dp))
-            .background(VgoColors.Surface, RoundedCornerShape(16.dp))
-            .padding(24.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp),
+            .border(4.dp, color.copy(alpha = 0.6f), RoundedCornerShape(32.dp))
+            .background(VgoColors.Surface, RoundedCornerShape(32.dp))
+            .padding(48.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         Text(title, style = MaterialTheme.typography.h3, color = color)
         Text(subtitle, style = MaterialTheme.typography.h4)

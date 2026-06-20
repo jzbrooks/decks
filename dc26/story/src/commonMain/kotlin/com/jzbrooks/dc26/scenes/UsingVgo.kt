@@ -5,9 +5,11 @@ import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -32,33 +34,35 @@ fun StoryboardBuilder.UsingVgo() {
         enterTransition = SceneEnter(alignment = Alignment.CenterEnd),
         exitTransition = SceneExit(alignment = Alignment.CenterEnd),
     ) {
-        SlideScaffold {
-            transition.AnimatedVisibility(
-                visible = { it.toValue() >= 3 },
-                enter = fadeIn(),
-                exit = fadeOut(),
-            ) {
-                Column(
-                    modifier = Modifier.fillMaxWidth().padding(top = 16.dp),
-                    verticalArrangement = Arrangement.spacedBy(28.dp),
+        Box(Modifier.fillMaxSize()) {
+            SlideScaffold {
+                transition.AnimatedVisibility(
+                    visible = { it.toValue() >= 3 },
+                    enter = fadeIn(),
+                    exit = fadeOut(),
                 ) {
-                    Row(
-                        horizontalArrangement = Arrangement.spacedBy(16.dp),
-                        verticalAlignment = Alignment.CenterVertically,
+                    Column(
+                        modifier = Modifier.fillMaxWidth().padding(top = 32.dp),
+                        verticalArrangement = Arrangement.spacedBy(56.dp),
                     ) {
-                        GradientChip("Gradle")
-                        Text(
-                            text = "id(\"com.jzbrooks.vgo\")",
-                            color = VgoColors.OnDark,
-                            style = MaterialTheme.typography.body1,
-                        )
-                    }
-                    Row(
-                        horizontalArrangement = Arrangement.spacedBy(16.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        GradientChip("IntelliJ")
-                        Caption("available on JetBrains Marketplace")
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(32.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
+                            GradientChip("Gradle")
+                            Text(
+                                text = "id(\"com.jzbrooks.vgo\")",
+                                color = VgoColors.OnDark,
+                                style = MaterialTheme.typography.body1,
+                            )
+                        }
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(32.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
+                            GradientChip("IntelliJ")
+                            Caption("available on JetBrains Marketplace")
+                        }
                     }
                 }
             }
@@ -69,9 +73,10 @@ fun StoryboardBuilder.UsingVgo() {
             ) {
                 Text(
                     """
-                    $ vgo --stats icon.svg
-                    icon.svg
-                    2,867 → 1,043 bytes (-63.6%)
+                    vgo -s icon.svg
+                    Size before: 2.80 KiB
+                    Size after: 1.02 KiB
+                    Percent saved: 63.6
                     """.trimIndent()
                 )
 
@@ -81,12 +86,20 @@ fun StoryboardBuilder.UsingVgo() {
                     exit = fadeOut(),
                 ) {
                     Column {
-                        Spacer(Modifier.height(16.dp))
+                        Spacer(Modifier.height(32.dp))
                         Text(
                             """
-                            $ vgo --stats res/drawable/*.xml
-                            ic_home.xml: 4,221 → 1,876 bytes (-55.6%)
-                            ic_search.xml: 3,104 → 1,492 bytes (-51.9%)
+                            vgo -s *.xml
+
+                            ic_home.xml
+                            Size before: 4.12 KiB
+                            Size after: 1.83 KiB
+                            Percent saved: 55.6
+
+                            ic_search.xml
+                            Size before: 3.03 KiB
+                            Size after: 1.46 KiB
+                            Percent saved: 51.9
                             """.trimIndent()
                         )
                     }
@@ -98,12 +111,10 @@ fun StoryboardBuilder.UsingVgo() {
                     exit = fadeOut(),
                 ) {
                     Column {
-                        Spacer(Modifier.height(16.dp))
-                        // --format flag syntax is inferred; verify against vgo's actual CLI
+                        Spacer(Modifier.height(32.dp))
                         Text(
                             """
-                            $ vgo --format imagevector icon.svg
-                            icon.kt written
+                            vgo --format iv icon.svg
                             """.trimIndent()
                         )
                     }

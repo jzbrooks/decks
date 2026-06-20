@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -119,7 +120,7 @@ fun StoryboardBuilder.CurvesToArcsAlgorithm() {
             val arc = fitArc()
 
             Row(
-                horizontalArrangement = Arrangement.spacedBy(48.dp),
+                horizontalArrangement = Arrangement.spacedBy(96.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 PathCanvas(
@@ -128,11 +129,11 @@ fun StoryboardBuilder.CurvesToArcsAlgorithm() {
                     showControlPoints = false,
                     stroke = VgoColors.Amber,
                     modifier = Modifier
-                        .size(340.dp)
-                        .clip(RoundedCornerShape(16.dp))
+                        .size(680.dp)
+                        .clip(RoundedCornerShape(32.dp))
                         .background(VgoColors.Surface),
                 ) { transform ->
-                    val dotRadius = 5.dp.toPx()
+                    val dotRadius = 10.dp.toPx()
 
                     if (frame >= 1) {
                         val sq1 = transform.toScreen(q1)
@@ -145,7 +146,7 @@ fun StoryboardBuilder.CurvesToArcsAlgorithm() {
 
                     if (frame >= 2 && arc != null) {
                         val dashes = PathEffect.dashPathEffect(floatArrayOf(8f, 8f), 0f)
-                        val lineWidth = 2.dp.toPx()
+                        val lineWidth = 4.dp.toPx()
 
                         val (b1a, b1b) = bisectorEndpoints(START, mid, 7f)
                         val sb1a = transform.toScreen(b1a)
@@ -169,7 +170,7 @@ fun StoryboardBuilder.CurvesToArcsAlgorithm() {
                             useCenter = false,
                             topLeft = Offset(sc.x - radius, sc.y - radius),
                             size = Size(radius * 2f, radius * 2f),
-                            style = Stroke(3.dp.toPx()),
+                            style = Stroke(6.dp.toPx()),
                         )
                     }
 
@@ -182,14 +183,14 @@ fun StoryboardBuilder.CurvesToArcsAlgorithm() {
                             val dy = sp.y - sc.y
                             val dist = sqrt(dx * dx + dy * dy)
                             val edge = Offset(sc.x + dx / dist * radius, sc.y + dy / dist * radius)
-                            drawLine(VgoColors.Azure, Offset(sp.x, sp.y), edge, 2.dp.toPx())
+                            drawLine(VgoColors.Azure, Offset(sp.x, sp.y), edge, 4.dp.toPx())
                         }
                     }
                 }
 
                 Column(
-                    Modifier.width(420.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp),
+                    Modifier.width(840.dp).fillMaxHeight(),
+                    verticalArrangement = Arrangement.spacedBy(32.dp),
                 ) {
                     Text("how it works", style = MaterialTheme.typography.h4)
 
@@ -231,7 +232,7 @@ fun StoryboardBuilder.CurvesToArcsAlgorithm() {
 
 @Composable
 private fun AlgorithmStep(label: String, detail: String) {
-    Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         Text(label, style = MaterialTheme.typography.subtitle1, color = VgoColors.Azure)
         Caption(detail)
     }

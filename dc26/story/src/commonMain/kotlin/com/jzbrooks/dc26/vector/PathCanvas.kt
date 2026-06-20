@@ -48,7 +48,7 @@ fun DrawScope.drawCommands(
     transform: ViewportTransform,
     commands: List<PathCommand>,
     color: Color,
-    strokeWidth: Dp = 3.dp,
+    strokeWidth: Dp = 6.dp,
     fill: Color? = null,
     upTo: Int = commands.size,
 ) {
@@ -72,7 +72,7 @@ fun PathCanvas(
     showControlPoints: Boolean = false,
     controlFilter: (Int) -> Boolean = { it == progress - 1 },
     stroke: Color = VgoColors.Azure,
-    strokeWidth: Dp = 3.dp,
+    strokeWidth: Dp = 6.dp,
     fill: Color? = null,
     overlay: DrawScope.(ViewportTransform) -> Unit = {},
 ) {
@@ -104,8 +104,8 @@ fun PathCanvas(
 
         if (showPen) {
             val pen = transform.toScreen(Point(penX, penY))
-            drawCircle(VgoColors.Magenta.copy(alpha = 0.25f), 13.dp.toPx(), pen)
-            drawCircle(VgoColors.Magenta, 6.dp.toPx(), pen)
+            drawCircle(VgoColors.Magenta.copy(alpha = 0.25f), 26.dp.toPx(), pen)
+            drawCircle(VgoColors.Magenta, 12.dp.toPx(), pen)
         }
 
         overlay(transform)
@@ -162,7 +162,7 @@ private fun DrawScope.drawControlHandles(transform: ViewportTransform, step: Pen
             VgoColors.Handle.copy(alpha = 0.7f),
             transform.toScreen(anchor),
             controlOffset,
-            strokeWidth = 2.dp.toPx(),
+            strokeWidth = 4.dp.toPx(),
             pathEffect = dash,
         )
         // Quadratic controls pull on both ends of the segment.
@@ -171,11 +171,11 @@ private fun DrawScope.drawControlHandles(transform: ViewportTransform, step: Pen
                 VgoColors.Handle.copy(alpha = 0.7f),
                 transform.toScreen(step.end),
                 controlOffset,
-                strokeWidth = 2.dp.toPx(),
+                strokeWidth = 4.dp.toPx(),
                 pathEffect = dash,
             )
         }
-        drawCircle(VgoColors.Handle, 7.dp.toPx(), controlOffset)
-        drawCircle(Color.White, 3.dp.toPx(), controlOffset)
+        drawCircle(VgoColors.Handle, 14.dp.toPx(), controlOffset)
+        drawCircle(Color.White, 6.dp.toPx(), controlOffset)
     }
 }

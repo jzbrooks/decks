@@ -54,7 +54,7 @@ fun StoryboardBuilder.VgoHistory() {
             Canvas(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(3.dp)
+                    .height(6.dp)
                     .align(Alignment.Center),
             ) {
                 drawLine(
@@ -69,7 +69,7 @@ fun StoryboardBuilder.VgoHistory() {
 
             Row(
                 modifier = Modifier.fillMaxSize(),
-                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                horizontalArrangement = Arrangement.spacedBy(32.dp),
             ) {
                 ENTRIES.forEachIndexed { index, entry ->
                     val alpha by revealTransition.animateFloat(
@@ -103,13 +103,13 @@ private fun TimelineNode(date: String, event: String, textAbove: Boolean, modifi
                 modifier = Modifier.weight(1f).fillMaxWidth(),
                 contentAlignment = Alignment.BottomCenter,
             ) {
-                NodeLabel(date, event, Modifier.padding(bottom = 20.dp))
+                NodeLabel(date, event, Modifier.padding(bottom = 40.dp))
             }
         } else {
             Spacer(Modifier.weight(1f))
         }
 
-        Canvas(Modifier.size(14.dp)) {
+        Canvas(Modifier.size(28.dp)) {
             drawCircle(brush = VgoGradient, radius = size.width / 2f)
         }
 
@@ -118,7 +118,7 @@ private fun TimelineNode(date: String, event: String, textAbove: Boolean, modifi
                 modifier = Modifier.weight(1f).fillMaxWidth(),
                 contentAlignment = Alignment.TopCenter,
             ) {
-                NodeLabel(date, event, Modifier.padding(top = 20.dp))
+                NodeLabel(date, event, Modifier.padding(top = 40.dp))
             }
         } else {
             Spacer(Modifier.weight(1f))
@@ -131,7 +131,7 @@ private fun NodeLabel(date: String, event: String, modifier: Modifier = Modifier
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(4.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         Text(
             text = date,

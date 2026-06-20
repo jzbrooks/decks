@@ -34,25 +34,25 @@ fun StoryboardBuilder.TodoStubScene(title: String, vararg notes: String) {
 
 @Composable
 fun TodoStub(title: String, notes: List<String>) {
-    Box(Modifier.fillMaxSize().padding(48.dp)) {
+    Box(Modifier.fillMaxSize().padding(96.dp)) {
         Box(
             Modifier
                 .fillMaxSize()
                 .drawBehind {
                     drawRoundRect(
                         brush = VgoGradient,
-                        cornerRadius = CornerRadius(24.dp.toPx()),
+                        cornerRadius = CornerRadius(48.dp.toPx()),
                         style = Stroke(
-                            width = 5.dp.toPx(),
+                            width = 10.dp.toPx(),
                             pathEffect = PathEffect.dashPathEffect(floatArrayOf(28f, 18f)),
                         ),
                     )
                 }
         ) {
             Column(
-                Modifier.align(Alignment.Center).padding(64.dp),
+                Modifier.align(Alignment.Center).padding(128.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(20.dp),
+                verticalArrangement = Arrangement.spacedBy(40.dp),
             ) {
                 GradientText(title, style = MaterialTheme.typography.h2, textAlign = TextAlign.Center)
                 for (note in notes) {
@@ -70,10 +70,10 @@ fun TodoStub(title: String, notes: List<String>) {
             Box(
                 Modifier
                     .align(Alignment.TopEnd)
-                    .padding(36.dp)
+                    .padding(72.dp)
                     .rotate(8f)
-                    .background(VgoColors.Amber, RoundedCornerShape(10.dp))
-                    .padding(horizontal = 20.dp, vertical = 8.dp)
+                    .background(VgoColors.Amber, RoundedCornerShape(20.dp))
+                    .padding(horizontal = 40.dp, vertical = 16.dp)
             ) {
                 Text(
                     "TODO",

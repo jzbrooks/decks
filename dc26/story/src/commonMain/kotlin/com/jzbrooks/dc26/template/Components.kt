@@ -21,7 +21,7 @@ import dev.bnorm.deck.shared.JetBrainsMono
 
 val CodeTextStyle: TextStyle
     @Composable
-    get() = TextStyle(fontFamily = JetBrainsMono, fontSize = 20.sp)
+    get() = TextStyle(fontFamily = JetBrainsMono, fontSize = 40.sp, lineHeight = 64.sp)
 
 @Composable
 fun Chip(
@@ -32,8 +32,8 @@ fun Chip(
 ) {
     Box(
         modifier
-            .background(color, RoundedCornerShape(8.dp))
-            .padding(horizontal = 12.dp, vertical = 4.dp)
+            .background(color, RoundedCornerShape(16.dp))
+            .padding(horizontal = 24.dp, vertical = 8.dp)
     ) {
         Text(text, color = contentColor, style = MaterialTheme.typography.body2, fontWeight = FontWeight.SemiBold)
     }
@@ -47,8 +47,8 @@ fun OutlinedChip(
 ) {
     Box(
         modifier
-            .border(2.dp, color, RoundedCornerShape(8.dp))
-            .padding(horizontal = 12.dp, vertical = 4.dp)
+            .border(4.dp, color, RoundedCornerShape(16.dp))
+            .padding(horizontal = 24.dp, vertical = 8.dp)
     ) {
         Text(text, color = color, style = MaterialTheme.typography.body2, fontWeight = FontWeight.SemiBold)
     }
@@ -58,8 +58,8 @@ fun OutlinedChip(
 fun GradientChip(text: String, modifier: Modifier = Modifier) {
     Box(
         modifier
-            .background(VgoGradient, RoundedCornerShape(8.dp))
-            .padding(horizontal = 12.dp, vertical = 4.dp)
+            .background(VgoGradient, RoundedCornerShape(16.dp))
+            .padding(horizontal = 24.dp, vertical = 8.dp)
     ) {
         Text(
             text,

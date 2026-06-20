@@ -52,13 +52,13 @@ val VgoTheme = ContentDecorator { content ->
 
     val typography = Typography(
         defaultFontFamily = Inter,
-        h1 = TextStyle(fontSize = 72.sp, fontWeight = FontWeight.Bold),
-        h2 = TextStyle(fontSize = 56.sp, fontWeight = FontWeight.Bold),
-        h3 = TextStyle(fontSize = 40.sp, fontWeight = FontWeight.SemiBold),
-        h4 = TextStyle(fontSize = 30.sp, fontWeight = FontWeight.SemiBold),
-        body1 = TextStyle(fontSize = 20.sp),
-        body2 = TextStyle(fontSize = 16.sp),
-        caption = TextStyle(fontSize = 14.sp),
+        h1 = TextStyle(fontSize = 144.sp, fontWeight = FontWeight.Bold),
+        h2 = TextStyle(fontSize = 112.sp, fontWeight = FontWeight.Bold),
+        h3 = TextStyle(fontSize = 80.sp, fontWeight = FontWeight.SemiBold),
+        h4 = TextStyle(fontSize = 60.sp, fontWeight = FontWeight.SemiBold),
+        body1 = TextStyle(fontSize = 40.sp),
+        body2 = TextStyle(fontSize = 32.sp),
+        caption = TextStyle(fontSize = 28.sp),
     )
 
     MaterialTheme(colors, typography) {

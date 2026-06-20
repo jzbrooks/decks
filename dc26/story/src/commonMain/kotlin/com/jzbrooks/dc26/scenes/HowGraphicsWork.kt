@@ -44,21 +44,21 @@ fun StoryboardBuilder.HowGraphicsWork() {
             var zoom by remember { mutableFloatStateOf(1f) }
 
             Row(
-                horizontalArrangement = Arrangement.spacedBy(48.dp),
+                horizontalArrangement = Arrangement.spacedBy(96.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-                    Row(horizontalArrangement = Arrangement.spacedBy(32.dp)) {
+                Column(verticalArrangement = Arrangement.spacedBy(32.dp)) {
+                    Row(horizontalArrangement = Arrangement.spacedBy(64.dp)) {
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally,
-                            verticalArrangement = Arrangement.spacedBy(8.dp),
+                            verticalArrangement = Arrangement.spacedBy(16.dp),
                         ) {
                             RasterCircle(zoom)
                             Text("raster — samples", color = VgoColors.Amber)
                         }
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally,
-                            verticalArrangement = Arrangement.spacedBy(8.dp),
+                            verticalArrangement = Arrangement.spacedBy(16.dp),
                         ) {
                             VectorCircle(zoom)
                             Text("vector — instructions", color = VgoColors.Azure)
@@ -66,7 +66,7 @@ fun StoryboardBuilder.HowGraphicsWork() {
                     }
 
                     Row(
-                        horizontalArrangement = Arrangement.spacedBy(16.dp),
+                        horizontalArrangement = Arrangement.spacedBy(32.dp),
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         Text("zoom", color = VgoColors.Muted)
@@ -74,19 +74,19 @@ fun StoryboardBuilder.HowGraphicsWork() {
                             value = zoom,
                             onValueChange = { zoom = it },
                             valueRange = 1f..6f,
-                            modifier = Modifier.width(280.dp),
+                            modifier = Modifier.width(560.dp),
                         )
                         Text("${(zoom * 10).toInt() / 10f}×", color = VgoColors.Muted)
                     }
                 }
 
-                Column(verticalArrangement = Arrangement.spacedBy(24.dp)) {
+                Column(verticalArrangement = Arrangement.spacedBy(48.dp)) {
                     RevealEach(transition.createChildTransition { it.toValue() }) {
                         item(index = 1) {
                             Caption("pixels store what the picture looks like;\nvectors store how to draw it")
                         }
                         item(index = 2) {
-                            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                            Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
                                 Text("…and \"how to draw it\" is a scene graph:")
                                 ProvideTextStyle(CodeTextStyle) {
                                     Text(
@@ -119,8 +119,8 @@ private const val MAX_ZOOM = 6f
 private fun RasterCircle(zoom: Float) {
     Canvas(
         Modifier
-            .size(240.dp)
-            .clip(RoundedCornerShape(16.dp))
+            .size(480.dp)
+            .clip(RoundedCornerShape(32.dp))
             .background(VgoColors.Surface)
     ) {
         val cell = size.width / SAMPLES * zoom
@@ -168,8 +168,8 @@ private fun RasterCircle(zoom: Float) {
 private fun VectorCircle(zoom: Float) {
     Canvas(
         Modifier
-            .size(240.dp)
-            .clip(RoundedCornerShape(16.dp))
+            .size(480.dp)
+            .clip(RoundedCornerShape(32.dp))
             .background(VgoColors.Surface)
     ) {
         val cell = size.width / SAMPLES * zoom
@@ -181,6 +181,6 @@ private fun VectorCircle(zoom: Float) {
             size.height / 2f + diag * t * cell,
         )
         drawCircle(VgoColors.PathFill, radius, circleCenter)
-        drawCircle(VgoColors.Azure, radius, circleCenter, style = Stroke(3.dp.toPx()))
+        drawCircle(VgoColors.Azure, radius, circleCenter, style = Stroke(6.dp.toPx()))
     }
 }

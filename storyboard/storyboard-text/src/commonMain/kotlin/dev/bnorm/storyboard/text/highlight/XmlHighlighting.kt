@@ -115,7 +115,6 @@ class XmlHighlighting(
             val stream = CharStreams.fromString(text + "\n")
             val lexer = XMLLexer(stream)
             val parser = XMLParser(CommonTokenStream(lexer))
-            parser.content()
 
             val walker = ParseTreeWalker()
             walker.walk(formatListener, parser.document())

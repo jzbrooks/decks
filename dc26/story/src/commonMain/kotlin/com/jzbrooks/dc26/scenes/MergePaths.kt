@@ -88,16 +88,16 @@ fun StoryboardBuilder.MergePaths() {
 
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(24.dp),
+                verticalArrangement = Arrangement.spacedBy(48.dp),
             ) {
                 PathCanvas(
                     commands = TRIANGLE,
                     viewport = VIEWPORT,
                     fill = VgoColors.PathFill,
                     modifier = Modifier
-                        .width(620.dp)
-                        .height(310.dp)
-                        .clip(RoundedCornerShape(16.dp))
+                        .width(1240.dp)
+                        .height(620.dp)
+                        .clip(RoundedCornerShape(32.dp))
                         .background(VgoColors.Surface),
                 ) { transform ->
                     drawCommands(transform, SQUARE, VgoColors.Azure, fill = VgoColors.PathFill)
@@ -122,7 +122,7 @@ fun StoryboardBuilder.MergePaths() {
                                     bottomRight.x - topLeft.x,
                                     bottomRight.y - topLeft.y,
                                 ),
-                                style = Stroke(2.dp.toPx(), pathEffect = dash),
+                                style = Stroke(4.dp.toPx(), pathEffect = dash),
                             )
                         }
                     }
@@ -141,7 +141,7 @@ fun StoryboardBuilder.MergePaths() {
                 }
 
                 Row(
-                    horizontalArrangement = Arrangement.spacedBy(16.dp),
+                    horizontalArrangement = Arrangement.spacedBy(32.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     when {

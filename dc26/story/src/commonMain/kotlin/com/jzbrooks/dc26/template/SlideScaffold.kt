@@ -19,12 +19,11 @@ fun SlideScaffold(
     content: @Composable BoxScope.() -> Unit,
 ) {
     Column(
-        Modifier.fillMaxSize().padding(horizontal = 32.dp, vertical = 24.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp),
+        Modifier.fillMaxSize().padding(horizontal = 64.dp, vertical = 48.dp),
+        verticalArrangement = Arrangement.spacedBy(24.dp),
     ) {
         val header = title ?: SceneSection.title
         Header { header() }
-        GradientDivider()
-        Body(Modifier.padding(top = 12.dp), content)
+        Body(Modifier.padding(top = 24.dp), content)
     }
 }

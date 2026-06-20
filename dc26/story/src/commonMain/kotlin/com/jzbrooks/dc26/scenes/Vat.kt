@@ -64,7 +64,7 @@ fun StoryboardBuilder.Vat() {
         Box(Modifier.fillMaxSize()) {
             Caption(
                 "vat — vector art in your terminal (kitty graphics protocol)",
-                modifier = Modifier.align(Alignment.TopCenter).padding(top = 48.dp),
+                modifier = Modifier.align(Alignment.TopCenter).padding(top = 96.dp),
             )
 
             TerminalPopup(
@@ -82,7 +82,7 @@ fun StoryboardBuilder.Vat() {
                         viewport = Rect(0f, 0f, 24f, 26f),
                         showGrid = false,
                         fill = VgoColors.PathFill,
-                        modifier = Modifier.size(240.dp).padding(top = 8.dp),
+                        modifier = Modifier.size(480.dp).padding(top = 16.dp),
                     )
                 }
             }

@@ -83,7 +83,7 @@ private val FRAMES = listOf(
     PathFrame(5, "Z", "close path", "a straight line back to the subpath start"),
     PathFrame(7, "M V", "a new subpath", "another M starts fresh; V is a vertical line"),
     PathFrame(9, "L Z", "line to", "a line to any point — then close the sail"),
-    PathFrame(12, "A", "elliptical arc", "radii, a rotation, two flags, an endpoint"),
+    PathFrame(11, "A", "elliptical arc", "radii, a rotation, two flags, an endpoint"),
     PathFrame(15, "Q", "quadratic Bézier", "one control point, shared by both ends"),
     PathFrame(15, "✋", "free play", "drag any control point", freePlay = true),
 )
@@ -122,9 +122,9 @@ fun StoryboardBuilder.HowPathsWork() {
                 }
             }
 
-            Column(verticalArrangement = Arrangement.spacedBy(20.dp)) {
+            Column(verticalArrangement = Arrangement.spacedBy(40.dp)) {
                 Row(
-                    horizontalArrangement = Arrangement.spacedBy(48.dp),
+                    horizontalArrangement = Arrangement.spacedBy(96.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     val dragModifier = if (frame.freePlay) {
@@ -160,15 +160,15 @@ fun StoryboardBuilder.HowPathsWork() {
                         },
                         fill = VgoColors.PathFill,
                         modifier = Modifier
-                            .size(360.dp)
-                            .clip(RoundedCornerShape(16.dp))
+                            .size(600.dp)
+                            .clip(RoundedCornerShape(32.dp))
                             .background(VgoColors.Surface)
                             .then(dragModifier),
                     )
 
                     Column(
-                        Modifier.width(340.dp),
-                        verticalArrangement = Arrangement.spacedBy(12.dp),
+                        Modifier.width(680.dp),
+                        verticalArrangement = Arrangement.spacedBy(24.dp),
                     ) {
                         GradientText(frame.letter, style = MaterialTheme.typography.h1)
                         Text(frame.name, style = MaterialTheme.typography.h3)
@@ -179,7 +179,7 @@ fun StoryboardBuilder.HowPathsWork() {
                 ProvideTextStyle(CodeTextStyle) {
                     Text(
                         commands.commandTokens(highlightIndex = frame.upTo - 1).joined(),
-                        modifier = Modifier.fillMaxWidth().padding(top = 4.dp),
+                        modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
                     )
                 }
             }

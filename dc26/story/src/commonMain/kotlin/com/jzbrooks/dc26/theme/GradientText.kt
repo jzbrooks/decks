@@ -32,7 +32,7 @@ fun GradientDivider(modifier: Modifier = Modifier) {
     Box(
         modifier
             .fillMaxWidth()
-            .height(3.dp)
+            .height(6.dp)
             .background(VgoGradient)
     )
 }

@@ -60,7 +60,7 @@ fun StoryboardBuilder.SimplifyCommands() {
         exitTransition = SceneExit(alignment = Alignment.CenterEnd),
     ) {
         SlideScaffold {
-            Column(verticalArrangement = Arrangement.spacedBy(24.dp)) {
+            Column(verticalArrangement = Arrangement.spacedBy(48.dp)) {
                 InteractiveDegenerateCurve()
 
                 RevealEach(transition.createChildTransition { it.toValue() }) {
@@ -104,7 +104,7 @@ private fun InteractiveDegenerateCurve() {
     }
 
     Row(
-        horizontalArrangement = Arrangement.spacedBy(40.dp),
+        horizontalArrangement = Arrangement.spacedBy(80.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         PathCanvas(
@@ -114,16 +114,16 @@ private fun InteractiveDegenerateCurve() {
             controlFilter = { true },
             stroke = if (degenerate) VgoColors.Azure else VgoColors.Amber,
             modifier = Modifier
-                .width(260.dp)
-                .height(260.dp)
-                .clip(RoundedCornerShape(16.dp))
+                .width(520.dp)
+                .height(520.dp)
+                .clip(RoundedCornerShape(32.dp))
                 .background(VgoColors.Surface)
                 .dragHandles(VIEWPORT, { listOf(control1, control2) }) { index, position ->
                     if (index == 0) control1 = position else control2 = position
                 },
         )
 
-        Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+        Column(verticalArrangement = Arrangement.spacedBy(24.dp)) {
             Text("SimplifyBezierCurveCommands", style = MaterialTheme.typography.h4)
             ProvideTextStyle(CodeTextStyle) {
                 MagicText(commands.commandTokens())
@@ -139,7 +139,7 @@ private fun InteractiveDegenerateCurve() {
 @androidx.compose.runtime.Composable
 private fun SimplifyRow(pass: String, before: String, after: String) {
     Row(
-        horizontalArrangement = Arrangement.spacedBy(16.dp),
+        horizontalArrangement = Arrangement.spacedBy(32.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         OutlinedChip(pass, color = VgoColors.Muted)

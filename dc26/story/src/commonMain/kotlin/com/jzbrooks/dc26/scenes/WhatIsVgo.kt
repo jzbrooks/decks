@@ -2,8 +2,10 @@ package com.jzbrooks.dc26.scenes
 
 import androidx.compose.animation.core.createChildTransition
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -29,42 +31,43 @@ fun StoryboardBuilder.WhatIsVgo() {
         enterTransition = SceneEnter(alignment = Alignment.CenterEnd),
         exitTransition = SceneExit(alignment = Alignment.CenterEnd),
     ) {
-        SlideScaffold {
-            Column(
-                Modifier.padding(top = 8.dp),
-                verticalArrangement = Arrangement.spacedBy(32.dp),
-            ) {
-                RevealEach(transition.createChildTransition { it.toValue() }) {
-                    item {
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(16.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                        ) {
-                            Text("Shrinks — and converts —", style = MaterialTheme.typography.h4)
-                            GradientChip("SVG")
-                            GradientChip("VectorDrawable")
-                            GradientChip("ImageVector")
+        Box(Modifier.fillMaxSize()) {
+            SlideScaffold {
+                Column(
+                    Modifier.padding(top = 16.dp),
+                    verticalArrangement = Arrangement.spacedBy(64.dp),
+                ) {
+                    RevealEach(transition.createChildTransition { it.toValue() }) {
+                        item {
+                            Row(
+                                horizontalArrangement = Arrangement.spacedBy(32.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                            ) {
+                                Text("Shrinks — and converts —", style = MaterialTheme.typography.h4)
+                                GradientChip("SVG")
+                                GradientChip("VectorDrawable")
+                                GradientChip("ImageVector")
+                            }
                         }
-                    }
 
-                    item(index = 2) {
-                        Column {
-                            GradientText("40–65% smaller", style = MaterialTheme.typography.h1)
-                            Caption("typical, on real-world artwork")
+                        item(index = 2) {
+                            Column {
+                                GradientText("40–65% smaller", style = MaterialTheme.typography.h1)
+                                Caption("typical, on real-world artwork")
+                            }
                         }
-                    }
 
-                    item(index = 3) {
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(16.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                        ) {
-                            Text("parse", style = MaterialTheme.typography.h4)
-                            Text("→", style = MaterialTheme.typography.h4, color = VgoColors.Muted)
-                            GradientText("optimize the IR", style = MaterialTheme.typography.h4)
-                            Text("→", style = MaterialTheme.typography.h4, color = VgoColors.Muted)
-                            Text("write", style = MaterialTheme.typography.h4)
-                            Caption("…like a compiler")
+                        item(index = 3) {
+                            Row(
+                                horizontalArrangement = Arrangement.spacedBy(32.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                            ) {
+                                Text("parse", style = MaterialTheme.typography.h4)
+                                Text("→", style = MaterialTheme.typography.h4, color = VgoColors.Muted)
+                                GradientText("optimize the IR", style = MaterialTheme.typography.h4)
+                                Text("→", style = MaterialTheme.typography.h4, color = VgoColors.Muted)
+                                Text("write", style = MaterialTheme.typography.h4)
+                            }
                         }
                     }
                 }
@@ -76,9 +79,10 @@ fun StoryboardBuilder.WhatIsVgo() {
             ) {
                 Text(
                     """
-                    $ vgo --stats icon.svg
-                    icon.svg
-                    2,867 → 1,043 bytes (-63.6%)
+                    vgo -s icon.svg
+                    Size before: 2.80 KiB
+                    Size after: 1.02 KiB
+                    Percent saved: 63.6
                     """.trimIndent()
                 )
             }

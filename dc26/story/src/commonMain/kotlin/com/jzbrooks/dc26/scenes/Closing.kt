@@ -32,17 +32,17 @@ fun StoryboardBuilder.Closing() {
         Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(28.dp),
+                verticalArrangement = Arrangement.spacedBy(56.dp),
             ) {
                 Box(
                     Modifier
-                        .background(Color.White, RoundedCornerShape(24.dp))
-                        .padding(horizontal = 40.dp, vertical = 20.dp)
+                        .background(Color.White, RoundedCornerShape(48.dp))
+                        .padding(horizontal = 80.dp, vertical = 40.dp)
                 ) {
                     Image(
                         painterResource(Res.drawable.vgo),
                         contentDescription = "vgo logo",
-                        modifier = Modifier.width(220.dp),
+                        modifier = Modifier.width(440.dp),
                     )
                 }
 

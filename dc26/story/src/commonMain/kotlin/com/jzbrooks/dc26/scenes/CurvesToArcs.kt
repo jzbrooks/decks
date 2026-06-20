@@ -137,7 +137,7 @@ fun StoryboardBuilder.CurvesToArcs() {
             val converts = withinTolerance && shorter
 
             Row(
-                horizontalArrangement = Arrangement.spacedBy(48.dp),
+                horizontalArrangement = Arrangement.spacedBy(96.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 PathCanvas(
@@ -147,8 +147,8 @@ fun StoryboardBuilder.CurvesToArcs() {
                     controlFilter = { true },
                     stroke = VgoColors.Amber,
                     modifier = Modifier
-                        .size(340.dp)
-                        .clip(RoundedCornerShape(16.dp))
+                        .size(680.dp)
+                        .clip(RoundedCornerShape(32.dp))
                         .background(VgoColors.Surface)
                         .dragHandles(VIEWPORT, { listOf(control1, control2) }) { index, position ->
                             if (index == 0) control1 = position else control2 = position
@@ -165,18 +165,18 @@ fun StoryboardBuilder.CurvesToArcs() {
                             useCenter = false,
                             topLeft = Offset(center.x - radius, center.y - radius),
                             size = Size(radius * 2f, radius * 2f),
-                            style = Stroke(3.dp.toPx()),
+                            style = Stroke(6.dp.toPx()),
                         )
                     }
                 }
 
-                Column(Modifier.width(420.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                Column(Modifier.width(840.dp), verticalArrangement = Arrangement.spacedBy(32.dp)) {
                     Text("ConvertCurvesToArcs", style = MaterialTheme.typography.h4)
 
                     ProvideTextStyle(CodeTextStyle) {
-                        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
                             Row(
-                                horizontalArrangement = Arrangement.spacedBy(12.dp),
+                                horizontalArrangement = Arrangement.spacedBy(24.dp),
                                 verticalAlignment = Alignment.CenterVertically,
                             ) {
                                 Text(cubicText, color = VgoColors.Amber)
@@ -184,7 +184,7 @@ fun StoryboardBuilder.CurvesToArcs() {
                             }
                             if (arcText != null) {
                                 Row(
-                                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                                    horizontalArrangement = Arrangement.spacedBy(24.dp),
                                     verticalAlignment = Alignment.CenterVertically,
                                 ) {
                                     Text(arcText, color = VgoColors.Azure)

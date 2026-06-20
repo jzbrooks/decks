@@ -12,6 +12,7 @@ import com.jzbrooks.dc26.scenes.VgoHistory
 import com.jzbrooks.dc26.scenes.HowGraphicsWork
 import com.jzbrooks.dc26.scenes.HowPathsWork
 import com.jzbrooks.dc26.scenes.MergePaths
+import com.jzbrooks.dc26.scenes.MergePathsAlgorithm
 import com.jzbrooks.dc26.scenes.OptimizationCategories
 import com.jzbrooks.dc26.scenes.Pipeline
 import com.jzbrooks.dc26.scenes.SimplifyCommands
@@ -22,18 +23,20 @@ import com.jzbrooks.dc26.scenes.WhatIsVgo
 import com.jzbrooks.dc26.theme.VgoTheme
 import dev.bnorm.storyboard.SceneFormat
 import dev.bnorm.storyboard.Storyboard
+import dev.bnorm.storyboard.layout.Keynote
 import dev.bnorm.storyboard.layout.template.section
 
 fun createStoryboard(): Storyboard {
     return Storyboard.build(
-        title = "vgo: A Vector Optimizer Built Like a Compiler",
-        format = SceneFormat.Default,
+        title = "Shrinking Vector Artwork",
+        format = SceneFormat.Keynote,
         decorator = VgoTheme,
     ) {
         Title()
 
         section("Origins") {
             Hobby()
+            Conversion(false)
             VgoHistory()
         }
 
@@ -42,25 +45,25 @@ fun createStoryboard(): Storyboard {
             HowGraphicsWork()
         }
 
-        section("How paths work") {
-            HowPathsWork()
-        }
+        HowPathsWork()
 
         section("Optimization") {
-            OptimizationCategories()
             Pipeline()
             CommandVariant()
             BakeTransformations()
             MergePaths()
+            MergePathsAlgorithm()
             SimplifyCommands()
             CurvesToArcs()
             CurvesToArcsAlgorithm()
         }
 
-        section("Conversion") {
-            Conversion()
-            DecompileApk()
+        section("Writing") {
+            OptimizationCategories()
+            Conversion(true)
         }
+
+        DecompileApk()
 
         section("Using vgo") {
             UsingVgo()

@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.toSize
 fun Modifier.dragHandles(
     viewport: Rect,
     handles: () -> List<Point>,
-    hitRadius: Dp = 24.dp,
+    hitRadius: Dp = 48.dp,
     onMove: (index: Int, position: Point) -> Unit,
 ): Modifier = pointerInput(viewport) {
     var active = -1
