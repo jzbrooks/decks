@@ -27,7 +27,7 @@ import dev.bnorm.storyboard.toValue
 
 fun StoryboardBuilder.WhatIsVgo() {
     scene(
-        frameCount = 4,
+        frameCount = 3,
         enterTransition = SceneEnter(alignment = Alignment.CenterEnd),
         exitTransition = SceneExit(alignment = Alignment.CenterEnd),
     ) {
@@ -39,34 +39,44 @@ fun StoryboardBuilder.WhatIsVgo() {
                 ) {
                     RevealEach(transition.createChildTransition { it.toValue() }) {
                         item {
-                            Row(
-                                horizontalArrangement = Arrangement.spacedBy(32.dp),
-                                verticalAlignment = Alignment.CenterVertically,
-                            ) {
-                                Text("Shrinks — and converts —", style = MaterialTheme.typography.h4)
-                                GradientChip("SVG")
-                                GradientChip("VectorDrawable")
-                                GradientChip("ImageVector")
+                            Column {
+                                Row(
+                                    horizontalArrangement = Arrangement.spacedBy(32.dp),
+                                    verticalAlignment = Alignment.CenterVertically,
+                                ) {
+                                    Row(
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        horizontalArrangement = Arrangement.spacedBy(16.dp),
+                                    ) {
+                                        Text("parse", style = MaterialTheme.typography.h4)
+                                        Column(verticalArrangement = Arrangement.spacedBy(32.dp)) {
+                                            GradientChip("SVG")
+                                            GradientChip("VectorDrawable")
+                                            GradientChip("ImageVector")
+                                        }
+                                    }
+                                    Text("→", style = MaterialTheme.typography.h4, color = VgoColors.Muted)
+                                    GradientText("optimize the IR", style = MaterialTheme.typography.h4)
+                                    Text("→", style = MaterialTheme.typography.h4, color = VgoColors.Muted)
+                                    Row(
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        horizontalArrangement = Arrangement.spacedBy(16.dp),
+                                    ) {
+                                        Text("write", style = MaterialTheme.typography.h4)
+                                        Column(verticalArrangement = Arrangement.spacedBy(32.dp)) {
+                                            GradientChip("SVG")
+                                            GradientChip("VectorDrawable")
+                                            GradientChip("ImageVector")
+                                        }
+                                    }
+                                }
                             }
                         }
 
                         item(index = 2) {
                             Column {
-                                GradientText("40–65% smaller", style = MaterialTheme.typography.h1)
+                                GradientText("20–65% smaller", style = MaterialTheme.typography.h1)
                                 Caption("typical, on real-world artwork")
-                            }
-                        }
-
-                        item(index = 3) {
-                            Row(
-                                horizontalArrangement = Arrangement.spacedBy(32.dp),
-                                verticalAlignment = Alignment.CenterVertically,
-                            ) {
-                                Text("parse", style = MaterialTheme.typography.h4)
-                                Text("→", style = MaterialTheme.typography.h4, color = VgoColors.Muted)
-                                GradientText("optimize the IR", style = MaterialTheme.typography.h4)
-                                Text("→", style = MaterialTheme.typography.h4, color = VgoColors.Muted)
-                                Text("write", style = MaterialTheme.typography.h4)
                             }
                         }
                     }

@@ -49,6 +49,13 @@ private val AFTER_XML = """
     <path android:pathData="M7.8,7.8L16.2,16.2 13.4,19.1 4.9,10.6Z"/>
 """.trimIndent()
 
+private val AFTER_XML_DISPLAY = """
+    <path
+        android:pathData="M7.8,7.8
+            L16.2,16.2 13.4,19.1
+            4.9,10.6Z"/>
+""".trimIndent()
+
 // The rectangle above with its rotation folded into the coordinates.
 private val BAKED: List<PathCommand> = listOf(
     MoveTo(Point(7.76f, 7.76f)),
@@ -74,19 +81,21 @@ fun StoryboardBuilder.BakeTransformations() {
                 Column(verticalArrangement = Arrangement.spacedBy(48.dp)) {
                     ProvideTextStyle(CodeTextStyle) {
                         val xml = transition.createChildTransition {
-                            (if (it.toValue() >= 1) AFTER_XML else BEFORE_XML).style(DC26_XML)
+                            (if (it.toValue() >= 1) AFTER_XML_DISPLAY else BEFORE_XML).style(DC26_XML)
                         }
                         MagicText(xml)
                     }
 
                     AnimatedVisibility(visible = frame >= 2, enter = fadeIn(), exit = fadeOut()) {
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(32.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                        ) {
-                            ByteChip(BEFORE_XML.length, color = VgoColors.Amber)
-                            Caption("→")
-                            ByteChip(AFTER_XML.length)
+                        Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                            Row(
+                                horizontalArrangement = Arrangement.spacedBy(32.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                            ) {
+                                ByteChip(BEFORE_XML.length, color = VgoColors.Amber)
+                                Caption("→")
+                                ByteChip(AFTER_XML.length)
+                            }
                             Caption("the transform is gone; the coordinates moved")
                         }
                     }
@@ -101,7 +110,7 @@ fun StoryboardBuilder.BakeTransformations() {
                         viewport = Rect(0f, 0f, 24f, 24f),
                         fill = VgoColors.PathFill,
                         modifier = Modifier
-                            .size(600.dp)
+                            .size(320.dp)
                             .clip(RoundedCornerShape(32.dp))
                             .background(VgoColors.Surface),
                     )

@@ -49,6 +49,25 @@ fun StoryboardBuilder.UsingVgo() {
                             horizontalArrangement = Arrangement.spacedBy(32.dp),
                             verticalAlignment = Alignment.CenterVertically,
                         ) {
+                            GradientChip("CLI")
+                            Column {
+                                Text(
+                                    text = "> brew tap jzbrooks/repo",
+                                    color = VgoColors.OnDark,
+                                    style = MaterialTheme.typography.body1,
+                                )
+                                Text(
+                                    text = "> brew install vgo",
+                                    color = VgoColors.OnDark,
+                                    style = MaterialTheme.typography.body1,
+                                )
+                            }
+                        }
+
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(32.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
                             GradientChip("Gradle")
                             Text(
                                 text = "id(\"com.jzbrooks.vgo\")",

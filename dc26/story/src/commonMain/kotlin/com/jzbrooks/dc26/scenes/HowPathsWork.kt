@@ -153,10 +153,12 @@ fun StoryboardBuilder.HowPathsWork() {
                         progress = frame.upTo,
                         showPen = true,
                         showControlPoints = true,
-                        controlFilter = if (frame.freePlay) {
-                            { true }
-                        } else {
-                            { it == frame.upTo - 1 }
+                        controlFilter = {
+                            if (frame.freePlay) {
+                                true
+                            } else {
+                                it == frame.upTo - 1
+                            }
                         },
                         fill = VgoColors.PathFill,
                         modifier = Modifier

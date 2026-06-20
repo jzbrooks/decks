@@ -37,15 +37,14 @@ fun createStoryboard(): Storyboard {
         section("Origins") {
             Hobby()
             Conversion(false)
-            VgoHistory()
         }
 
         section("What is vgo?") {
             WhatIsVgo()
+            VgoHistory()
             HowGraphicsWork()
+            HowPathsWork()
         }
-
-        HowPathsWork()
 
         section("Optimization") {
             Pipeline()

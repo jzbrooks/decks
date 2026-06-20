@@ -37,7 +37,7 @@ private data class TimelineEntry(val date: String, val event: String, val textAb
 
 private val ENTRIES = listOf(
     TimelineEntry("2018", "building an app — PDF icons on iOS, VectorDrawable on Android", true),
-    TimelineEntry("August 2019", "initial commit — VectorDrawable & PDF targets", false),
+    TimelineEntry("August 2019", "initial commit — VectorDrawable Target", false),
     TimelineEntry("September 2019", "iOS 13 ships", true),
     TimelineEntry("October 2019", "SVG support lands", false),
     TimelineEntry("July 2021", "Compose 1.0 — ImageVector API ships", true),
