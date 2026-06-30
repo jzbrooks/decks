@@ -75,8 +75,8 @@ fun StoryboardBuilder.WhatIsVgo() {
 
                         item(index = 2) {
                             Column {
-                                GradientText("20–65% smaller", style = MaterialTheme.typography.h1)
-                                Caption("typical, on real-world artwork")
+                                GradientText("Up to 65% smaller", style = MaterialTheme.typography.h1)
+                                Caption("on real-world artwork")
                             }
                         }
                     }

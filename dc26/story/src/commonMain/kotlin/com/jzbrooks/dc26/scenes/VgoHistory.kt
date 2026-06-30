@@ -23,8 +23,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.text.style.LineBreak
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.jzbrooks.dc26.template.SlideScaffold
 import com.jzbrooks.dc26.theme.VgoColors
 import com.jzbrooks.dc26.theme.VgoGradient
@@ -36,12 +38,12 @@ import dev.bnorm.storyboard.toValue
 private data class TimelineEntry(val date: String, val event: String, val textAbove: Boolean)
 
 private val ENTRIES = listOf(
-    TimelineEntry("2018", "building an app — PDF icons on iOS, VectorDrawable on Android", true),
-    TimelineEntry("August 2019", "initial commit — VectorDrawable Target", false),
+    TimelineEntry("2018", "Web Tools", true),
+    TimelineEntry("August 2019", "VectorDrawable Support", false),
     TimelineEntry("September 2019", "iOS 13 ships", true),
-    TimelineEntry("October 2019", "SVG support lands", false),
-    TimelineEntry("July 2021", "Compose 1.0 — ImageVector API ships", true),
-    TimelineEntry("May 2025", "ImageVector support lands in vgo", false),
+    TimelineEntry("October 2019", "SVG Support", false),
+    TimelineEntry("May 2025", "ImageVector Support*", true),
+    TimelineEntry("2027", "???", false),
 )
 
 fun StoryboardBuilder.VgoHistory() {
@@ -142,7 +144,7 @@ private fun NodeLabel(date: String, event: String, modifier: Modifier = Modifier
         Text(
             text = event,
             color = VgoColors.OnDark,
-            style = MaterialTheme.typography.body1,
+            style = MaterialTheme.typography.body1.copy(fontSize = 34.sp),
             textAlign = TextAlign.Center,
         )
     }

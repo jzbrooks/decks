@@ -7,7 +7,10 @@ import com.jzbrooks.dc26.scenes.Conversion
 import com.jzbrooks.dc26.scenes.CurvesToArcs
 import com.jzbrooks.dc26.scenes.CurvesToArcsAlgorithm
 import com.jzbrooks.dc26.scenes.DecompileApk
-import com.jzbrooks.dc26.scenes.Hobby
+import com.jzbrooks.dc26.scenes.MotivationCoffee
+import com.jzbrooks.dc26.scenes.MotivationNode
+import com.jzbrooks.dc26.scenes.MotivationTooling
+import com.jzbrooks.dc26.scenes.MotivationVectorPain
 import com.jzbrooks.dc26.scenes.VgoHistory
 import com.jzbrooks.dc26.scenes.HowGraphicsWork
 import com.jzbrooks.dc26.scenes.HowPathsWork
@@ -15,6 +18,7 @@ import com.jzbrooks.dc26.scenes.MergePaths
 import com.jzbrooks.dc26.scenes.MergePathsAlgorithm
 import com.jzbrooks.dc26.scenes.OptimizationCategories
 import com.jzbrooks.dc26.scenes.Pipeline
+import com.jzbrooks.dc26.scenes.SimplifyBezierAlgorithm
 import com.jzbrooks.dc26.scenes.SimplifyCommands
 import com.jzbrooks.dc26.scenes.Title
 import com.jzbrooks.dc26.scenes.UsingVgo
@@ -35,7 +39,10 @@ fun createStoryboard(): Storyboard {
         Title()
 
         section("Origins") {
-            Hobby()
+            MotivationTooling()
+            MotivationVectorPain()
+            MotivationNode()
+            MotivationCoffee()
             Conversion(false)
         }
 
@@ -53,6 +60,7 @@ fun createStoryboard(): Storyboard {
             MergePaths()
             MergePathsAlgorithm()
             SimplifyCommands()
+            SimplifyBezierAlgorithm()
             CurvesToArcs()
             CurvesToArcsAlgorithm()
         }

@@ -8,6 +8,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ProvideTextStyle
@@ -75,10 +77,14 @@ fun StoryboardBuilder.BakeTransformations() {
             val frame = transition.currentState.toValue()
 
             Row(
-                horizontalArrangement = Arrangement.spacedBy(96.dp),
                 verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier.fillMaxSize()
             ) {
-                Column(verticalArrangement = Arrangement.spacedBy(48.dp)) {
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(48.dp),
+                    modifier = Modifier.weight(2f)
+                ) {
                     ProvideTextStyle(CodeTextStyle) {
                         val xml = transition.createChildTransition {
                             (if (it.toValue() >= 1) AFTER_XML_DISPLAY else BEFORE_XML).style(DC26_XML)
@@ -96,7 +102,6 @@ fun StoryboardBuilder.BakeTransformations() {
                                 Caption("→")
                                 ByteChip(AFTER_XML.length)
                             }
-                            Caption("the transform is gone; the coordinates moved")
                         }
                     }
                 }
@@ -104,6 +109,7 @@ fun StoryboardBuilder.BakeTransformations() {
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(24.dp),
+                    modifier = Modifier.weight(1f)
                 ) {
                     PathCanvas(
                         commands = BAKED,
@@ -114,7 +120,6 @@ fun StoryboardBuilder.BakeTransformations() {
                             .clip(RoundedCornerShape(32.dp))
                             .background(VgoColors.Surface),
                     )
-                    Caption("the render never changes")
                 }
             }
         }

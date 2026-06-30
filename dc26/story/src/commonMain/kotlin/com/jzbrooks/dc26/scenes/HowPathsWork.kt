@@ -76,13 +76,13 @@ private class PathFrame(
 )
 
 private val FRAMES = listOf(
-    PathFrame(1, "M", "move to", "lift the pen and set its position — no ink"),
-    PathFrame(2, "H", "horizontal line", "a single number: the x to stop at"),
+    PathFrame(1, "M", "move to", "lift the pen and drop at new coordinates"),
+    PathFrame(2, "H", "horizontal line", "draw to the specified x"),
     PathFrame(3, "C", "cubic Bézier", "two control points pull on the segment"),
-    PathFrame(4, "S", "smooth cubic", "the previous control point, mirrored, comes free"),
+    PathFrame(4, "S", "smooth cubic", "the previous control point is mirrored"),
     PathFrame(5, "Z", "close path", "a straight line back to the subpath start"),
-    PathFrame(7, "M V", "a new subpath", "another M starts fresh; V is a vertical line"),
-    PathFrame(9, "L Z", "line to", "a line to any point — then close the sail"),
+    PathFrame(7, "M V", "a new subpath", "another M starts fresh;\nV is a vertical line"),
+    PathFrame(9, "L Z", "line to", "a line to any point\nthen close the sail"),
     PathFrame(11, "A", "elliptical arc", "radii, a rotation, two flags, an endpoint"),
     PathFrame(15, "Q", "quadratic Bézier", "one control point, shared by both ends"),
     PathFrame(15, "✋", "free play", "drag any control point", freePlay = true),

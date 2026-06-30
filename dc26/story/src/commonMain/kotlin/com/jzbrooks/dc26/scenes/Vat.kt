@@ -71,7 +71,7 @@ fun StoryboardBuilder.Vat() {
                 visible = { it != Frame.End },
                 title = "boats — zsh",
             ) {
-                Text("$ vat boat.svg")
+                Text("> vat boat.svg")
                 transition.AnimatedVisibility(
                     visible = { it.toValue() >= 1 },
                     enter = fadeIn() + expandVertically(),

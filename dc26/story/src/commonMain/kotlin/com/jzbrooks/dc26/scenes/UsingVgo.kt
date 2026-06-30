@@ -30,14 +30,14 @@ import dev.bnorm.storyboard.toValue
 
 fun StoryboardBuilder.UsingVgo() {
     scene(
-        frameCount = 4,
+        frameCount = 3,
         enterTransition = SceneEnter(alignment = Alignment.CenterEnd),
         exitTransition = SceneExit(alignment = Alignment.CenterEnd),
     ) {
         Box(Modifier.fillMaxSize()) {
             SlideScaffold {
                 transition.AnimatedVisibility(
-                    visible = { it.toValue() >= 3 },
+                    visible = { it.toValue() >= 2 },
                     enter = fadeIn(),
                     exit = fadeOut(),
                 ) {
@@ -87,12 +87,12 @@ fun StoryboardBuilder.UsingVgo() {
             }
 
             TerminalPopup(
-                visible = { it.toValue() < 3 },
+                visible = { it.toValue() < 2 },
                 title = "icons — zsh",
             ) {
                 Text(
                     """
-                    vgo -s icon.svg
+                    > vgo -s icon.svg
                     Size before: 2.80 KiB
                     Size after: 1.02 KiB
                     Percent saved: 63.6
@@ -106,36 +106,7 @@ fun StoryboardBuilder.UsingVgo() {
                 ) {
                     Column {
                         Spacer(Modifier.height(32.dp))
-                        Text(
-                            """
-                            vgo -s *.xml
-
-                            ic_home.xml
-                            Size before: 4.12 KiB
-                            Size after: 1.83 KiB
-                            Percent saved: 55.6
-
-                            ic_search.xml
-                            Size before: 3.03 KiB
-                            Size after: 1.46 KiB
-                            Percent saved: 51.9
-                            """.trimIndent()
-                        )
-                    }
-                }
-
-                transition.AnimatedVisibility(
-                    visible = { it.toValue() >= 2 },
-                    enter = expandVertically() + fadeIn(),
-                    exit = fadeOut(),
-                ) {
-                    Column {
-                        Spacer(Modifier.height(32.dp))
-                        Text(
-                            """
-                            vgo --format iv icon.svg
-                            """.trimIndent()
-                        )
+                        Text("> vgo --format iv icon.svg")
                     }
                 }
             }
