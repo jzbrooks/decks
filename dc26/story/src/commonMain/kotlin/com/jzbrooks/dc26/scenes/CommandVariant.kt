@@ -59,7 +59,7 @@ fun StoryboardBuilder.CommandVariant() {
         enterTransition = SceneEnter(alignment = Alignment.CenterEnd),
         exitTransition = SceneExit(alignment = Alignment.CenterEnd),
     ) {
-        SlideScaffold {
+        SlideScaffold(badge = "Top-down", badgeLabel = "Command Variant") {
             val frame = transition.currentState.toValue()
             var selection by remember { mutableStateOf<Variant?>(null) }
             // Frames walk the variants for the talk; the buttons let the speaker go off-script.

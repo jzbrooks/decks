@@ -10,16 +10,15 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.geometry.CornerRadius
-import androidx.compose.ui.graphics.PathEffect
-import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -30,42 +29,17 @@ import com.jzbrooks.dc26.template.SlideScaffold
 import com.jzbrooks.dc26.template.Terminal
 import com.jzbrooks.dc26.theme.GradientText
 import com.jzbrooks.dc26.theme.VgoColors
-import com.jzbrooks.dc26.theme.VgoGradient
 import com.jzbrooks.deck.story.generated.resources.Res
 import com.jzbrooks.deck.story.generated.resources.ic_add_a_profile_megaphone_image
 import com.jzbrooks.deck.story.generated.resources.ic_notification_permission
 import com.jzbrooks.deck.story.generated.resources.ic_onboarding
+import com.jzbrooks.deck.story.generated.resources.niche_grinder
 import dev.bnorm.storyboard.StoryboardBuilder
 import dev.bnorm.storyboard.layout.template.RevealEach
 import dev.bnorm.storyboard.layout.template.SceneEnter
 import dev.bnorm.storyboard.layout.template.SceneExit
 import dev.bnorm.storyboard.toValue
 import org.jetbrains.compose.resources.painterResource
-
-@Composable
-private fun ScreenshotPlaceholder(label: String, modifier: Modifier = Modifier) {
-    Box(
-        modifier.drawBehind {
-            drawRoundRect(
-                brush = VgoGradient,
-                cornerRadius = CornerRadius(24.dp.toPx()),
-                style = Stroke(
-                    width = 4.dp.toPx(),
-                    pathEffect = PathEffect.dashPathEffect(floatArrayOf(20f, 12f)),
-                ),
-            )
-        },
-        contentAlignment = Alignment.Center,
-    ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-        ) {
-            Text("[ screenshot ]", color = VgoColors.Muted, style = MaterialTheme.typography.body1)
-            Text(label, color = VgoColors.Muted, style = MaterialTheme.typography.body2, textAlign = TextAlign.Center)
-        }
-    }
-}
 
 fun StoryboardBuilder.MotivationTooling() {
     scene(
@@ -270,14 +244,19 @@ fun StoryboardBuilder.MotivationCoffee() {
                         style = MaterialTheme.typography.h3,
                     )
                     Text(
-                        "My Niche grinder made morning coffee effortless. The vector shrinking workflow was anything but.",
+                        "You're less inclined to use the tools.",
                         style = MaterialTheme.typography.body1,
                         color = VgoColors.Muted,
                     )
                 }
-                ScreenshotPlaceholder(
-                    "Niche grinder / coffee setup",
-                    Modifier.weight(1f).fillMaxHeight(0.7f),
+                Image(
+                    painterResource(Res.drawable.niche_grinder),
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxHeight(0.7f)
+                        .clip(RoundedCornerShape(24.dp)),
                 )
             }
         }

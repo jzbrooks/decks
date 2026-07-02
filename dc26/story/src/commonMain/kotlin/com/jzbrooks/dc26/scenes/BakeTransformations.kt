@@ -73,7 +73,7 @@ fun StoryboardBuilder.BakeTransformations() {
         enterTransition = SceneEnter(alignment = Alignment.CenterEnd),
         exitTransition = SceneExit(alignment = Alignment.CenterEnd),
     ) {
-        SlideScaffold {
+        SlideScaffold(badge = "Top-down", badgeLabel = "Bake Transformations") {
             val frame = transition.currentState.toValue()
 
             Row(

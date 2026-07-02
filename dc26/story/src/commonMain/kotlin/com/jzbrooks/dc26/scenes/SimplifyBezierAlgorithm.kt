@@ -70,7 +70,7 @@ fun StoryboardBuilder.SimplifyBezierAlgorithm() {
         enterTransition = SceneEnter(alignment = Alignment.CenterEnd),
         exitTransition = SceneExit(alignment = Alignment.CenterEnd),
     ) {
-        SlideScaffold {
+        SlideScaffold(badge = "Top-down", badgeLabel = "Simplify Bezier Curve Commands") {
             val frame = transition.currentState.toValue()
             val d1 = distanceToChord(REL_C1)
             val d2 = distanceToChord(REL_C2)

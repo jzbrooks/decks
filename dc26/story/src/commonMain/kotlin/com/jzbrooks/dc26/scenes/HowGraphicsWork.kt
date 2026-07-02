@@ -1,11 +1,16 @@
 package com.jzbrooks.dc26.scenes
 
 import androidx.compose.animation.core.createChildTransition
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -36,7 +41,7 @@ import kotlin.math.sqrt
 
 fun StoryboardBuilder.HowGraphicsWork() {
     scene(
-        frameCount = 4,
+        frameCount = 3,
         enterTransition = SceneEnter(alignment = Alignment.CenterEnd),
         exitTransition = SceneExit(alignment = Alignment.CenterEnd),
     ) {
@@ -80,14 +85,25 @@ fun StoryboardBuilder.HowGraphicsWork() {
                     }
                 }
 
-                Column(verticalArrangement = Arrangement.spacedBy(48.dp)) {
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(48.dp),
+                    modifier = Modifier.fillMaxHeight()
+                ) {
                     RevealEach(transition.createChildTransition { it.toValue() }) {
-                        item(index = 1) {
-                            Caption("pixels store what the picture looks like;\nvectors store how to draw it")
+                        item(
+                            index = 1,
+                            enterTransition = { fadeIn() + expandVertically() },
+                            exitTransition = { fadeOut() + shrinkVertically() },
+                        ) {
+                            Caption("rasters store samples;\nvectors store instructions")
                         }
-                        item(index = 2) {
+                        item(
+                            index = 2,
+                            enterTransition = { fadeIn() + expandVertically() },
+                            exitTransition = { fadeOut() + shrinkVertically() },
+                        ) {
                             Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-                                Text("…and \"how to draw it\" is a scene graph:")
+                                Caption("…and \"instructions\" are a scene graph:")
                                 ProvideTextStyle(CodeTextStyle) {
                                     Text(
                                         """
@@ -100,9 +116,6 @@ fun StoryboardBuilder.HowGraphicsWork() {
                                     )
                                 }
                             }
-                        }
-                        item(index = 3) {
-                            Caption("scaling rasters resamples fixed data — zoom in and you get blur or blocks;\nantialiasing softens edges that were never precisely defined")
                         }
                     }
                 }

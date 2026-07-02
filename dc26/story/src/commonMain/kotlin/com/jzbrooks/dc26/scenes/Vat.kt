@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -62,10 +63,19 @@ fun StoryboardBuilder.Vat() {
         exitTransition = SceneExit(alignment = Alignment.CenterEnd),
     ) {
         Box(Modifier.fillMaxSize()) {
-            Caption(
-                "vat — vector art in your terminal (kitty graphics protocol)",
+            Column(
                 modifier = Modifier.align(Alignment.TopCenter).padding(top = 96.dp),
-            )
+            ) {
+                Text(
+                    "vat",
+                    style = MaterialTheme.typography.h3,
+                    color = VgoColors.OnDark,
+                )
+
+                Caption(
+                    "vector art in your terminal (kitty graphics protocol)",
+                )
+            }
 
             TerminalPopup(
                 visible = { it != Frame.End },

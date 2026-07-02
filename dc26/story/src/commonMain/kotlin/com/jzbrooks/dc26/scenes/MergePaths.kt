@@ -79,7 +79,7 @@ fun StoryboardBuilder.MergePaths() {
         enterTransition = SceneEnter(alignment = Alignment.CenterEnd),
         exitTransition = SceneExit(alignment = Alignment.CenterEnd),
     ) {
-        SlideScaffold {
+        SlideScaffold(badge = "Bottom-up", badgeLabel = "Merge Paths") {
             val frame = transition.currentState.toValue()
 
             val triangleBounds = remember { TRIANGLE.toComposePath().getBounds() }

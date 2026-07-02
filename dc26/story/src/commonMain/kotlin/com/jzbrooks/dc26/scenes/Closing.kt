@@ -10,12 +10,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.jzbrooks.dc26.template.Caption
 import com.jzbrooks.dc26.theme.GradientText
+import com.jzbrooks.dc26.theme.VgoColors
 import com.jzbrooks.deck.story.generated.resources.Res
 import com.jzbrooks.deck.story.generated.resources.vgo
 import dev.bnorm.storyboard.StoryboardBuilder
@@ -47,7 +49,12 @@ fun StoryboardBuilder.Closing() {
                 }
 
                 GradientText("github.com/jzbrooks/vgo", style = MaterialTheme.typography.h2)
-                Caption("…and github.com/jzbrooks/vat — thanks!")
+                Caption("github.com/jzbrooks/vat")
+                Text(
+                    "Thanks!",
+                    style = MaterialTheme.typography.h3,
+                    color = VgoColors.OnDark,
+                )
             }
         }
     }

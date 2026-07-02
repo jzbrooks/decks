@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.jzbrooks.dc26.template.Caption
 import com.jzbrooks.dc26.template.CodeTextStyle
 import com.jzbrooks.dc26.template.OutlinedChip
@@ -59,7 +60,7 @@ fun StoryboardBuilder.SimplifyCommands() {
         enterTransition = SceneEnter(alignment = Alignment.CenterEnd),
         exitTransition = SceneExit(alignment = Alignment.CenterEnd),
     ) {
-        SlideScaffold {
+        SlideScaffold(badge = "Top-down", badgeLabel = "Simplify Commands") {
             Column(verticalArrangement = Arrangement.spacedBy(48.dp)) {
                 InteractiveDegenerateCurve()
 
@@ -143,10 +144,10 @@ private fun SimplifyRow(pass: String, before: String, after: String) {
         verticalAlignment = Alignment.CenterVertically,
     ) {
         OutlinedChip(pass, color = VgoColors.Muted)
-        ProvideTextStyle(CodeTextStyle) {
-            Text(before, color = VgoColors.Amber)
+        ProvideTextStyle(CodeTextStyle.copy(fontSize = 26.sp, lineHeight = 32.sp)) {
+            Text(before, color = VgoColors.Amber, softWrap = false)
             Text("→", color = VgoColors.Muted)
-            Text(after, color = VgoColors.Azure)
+            Text(after, color = VgoColors.Azure, softWrap = false)
         }
     }
 }

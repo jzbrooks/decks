@@ -111,7 +111,7 @@ fun StoryboardBuilder.CurvesToArcs() {
         enterTransition = SceneEnter(alignment = Alignment.CenterEnd),
         exitTransition = SceneExit(alignment = Alignment.CenterEnd),
     ) {
-        SlideScaffold {
+        SlideScaffold(badge = "Top-down", badgeLabel = "Convert Curves To Arcs") {
             val frame = transition.currentState.toValue()
             var control1 by remember { mutableStateOf(Point(8f, 6f)) }
             var control2 by remember { mutableStateOf(Point(16f, 6f)) }

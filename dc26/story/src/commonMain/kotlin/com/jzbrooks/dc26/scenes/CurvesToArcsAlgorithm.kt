@@ -111,7 +111,7 @@ fun StoryboardBuilder.CurvesToArcsAlgorithm() {
         enterTransition = SceneEnter(alignment = Alignment.CenterEnd),
         exitTransition = SceneExit(alignment = Alignment.CenterEnd),
     ) {
-        SlideScaffold {
+        SlideScaffold(badge = "Top-down", badgeLabel = "Convert Curves To Arcs") {
             val frame = transition.currentState.toValue()
 
             val mid = cubicPoint(0.5f)

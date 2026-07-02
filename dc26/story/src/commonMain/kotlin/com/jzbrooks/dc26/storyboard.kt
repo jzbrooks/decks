@@ -6,7 +6,8 @@ import com.jzbrooks.dc26.scenes.CommandVariant
 import com.jzbrooks.dc26.scenes.Conversion
 import com.jzbrooks.dc26.scenes.CurvesToArcs
 import com.jzbrooks.dc26.scenes.CurvesToArcsAlgorithm
-import com.jzbrooks.dc26.scenes.DecompileApk
+import com.jzbrooks.dc26.scenes.KotlinMultiplatformFunnel
+import com.jzbrooks.dc26.scenes.LlvmFunnel
 import com.jzbrooks.dc26.scenes.MotivationCoffee
 import com.jzbrooks.dc26.scenes.MotivationNode
 import com.jzbrooks.dc26.scenes.MotivationTooling
@@ -18,6 +19,7 @@ import com.jzbrooks.dc26.scenes.MergePaths
 import com.jzbrooks.dc26.scenes.MergePathsAlgorithm
 import com.jzbrooks.dc26.scenes.OptimizationCategories
 import com.jzbrooks.dc26.scenes.Pipeline
+import com.jzbrooks.dc26.scenes.R8Funnel
 import com.jzbrooks.dc26.scenes.SimplifyBezierAlgorithm
 import com.jzbrooks.dc26.scenes.SimplifyCommands
 import com.jzbrooks.dc26.scenes.Title
@@ -38,39 +40,41 @@ fun createStoryboard(): Storyboard {
     ) {
         Title()
 
-        section("Origins") {
-            MotivationTooling()
-            MotivationVectorPain()
-            MotivationNode()
-            MotivationCoffee()
+        MotivationVectorPain()
+        MotivationNode()
+        MotivationCoffee()
+        MotivationTooling()
+
+        section("What are vector graphics, actually?") {
+            HowGraphicsWork()
             Conversion(false)
+        }
+
+        section("Which got me thinkin’") {
+            R8Funnel()
+            KotlinMultiplatformFunnel()
+            LlvmFunnel()
         }
 
         section("What is vgo?") {
             WhatIsVgo()
+            Conversion(true)
             VgoHistory()
-            HowGraphicsWork()
-            HowPathsWork()
         }
 
-        section("Optimization") {
+        section("Optimization Pipeline") {
+            HowPathsWork()
+            OptimizationCategories()
             Pipeline()
             CommandVariant()
             BakeTransformations()
-            MergePaths()
-            MergePathsAlgorithm()
             SimplifyCommands()
             SimplifyBezierAlgorithm()
             CurvesToArcs()
             CurvesToArcsAlgorithm()
+            MergePaths()
+            MergePathsAlgorithm()
         }
-
-        section("Writing") {
-            OptimizationCategories()
-            Conversion(true)
-        }
-
-        DecompileApk()
 
         section("Using vgo") {
             UsingVgo()

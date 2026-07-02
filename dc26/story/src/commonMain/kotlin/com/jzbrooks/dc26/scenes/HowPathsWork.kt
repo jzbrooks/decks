@@ -82,7 +82,7 @@ private val FRAMES = listOf(
     PathFrame(4, "S", "smooth cubic", "the previous control point is mirrored"),
     PathFrame(5, "Z", "close path", "a straight line back to the subpath start"),
     PathFrame(7, "M V", "a new subpath", "another M starts fresh;\nV is a vertical line"),
-    PathFrame(9, "L Z", "line to", "a line to any point\nthen close the sail"),
+    PathFrame(9, "L Z", "line to", "a line to any point"),
     PathFrame(11, "A", "elliptical arc", "radii, a rotation, two flags, an endpoint"),
     PathFrame(15, "Q", "quadratic Bézier", "one control point, shared by both ends"),
     PathFrame(15, "✋", "free play", "drag any control point", freePlay = true),

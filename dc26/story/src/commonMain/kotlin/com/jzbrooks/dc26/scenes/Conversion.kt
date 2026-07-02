@@ -82,13 +82,16 @@ fun StoryboardBuilder.Conversion(includeImageVector: Boolean) {
                 ) {
                     OutlinedChip("SVG", color = if (frame == 0) VgoColors.Azure else VgoColors.Muted)
                     Text("⇄", style = MaterialTheme.typography.h3, color = VgoColors.Muted)
-                    Box(
-                        if (frame >= 3) Modifier.border(6.dp, VgoGradient, RoundedCornerShape(24.dp))
-                        else Modifier
-                    ) {
-                        GradientChip("IR", Modifier.padding(8.dp))
+                    if (includeImageVector) {
+                        Box(
+                            if (frame >= 3) Modifier.border(6.dp, VgoGradient, RoundedCornerShape(24.dp))
+                            else Modifier
+                        ) {
+                            GradientChip("IR", Modifier.padding(8.dp))
+                        }
+
+                        Text("⇄", style = MaterialTheme.typography.h3, color = VgoColors.Muted)
                     }
-                    Text("⇄", style = MaterialTheme.typography.h3, color = VgoColors.Muted)
                     OutlinedChip("VectorDrawable", color = if (frame == 1) VgoColors.Azure else VgoColors.Muted)
                     if (includeImageVector) {
                         Text("·", style = MaterialTheme.typography.h3, color = VgoColors.Muted)
