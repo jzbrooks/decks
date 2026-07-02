@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -21,7 +20,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.unit.dp
-import com.jzbrooks.dc26.template.Caption
+import com.jzbrooks.dc26.template.AlgorithmStep
 import com.jzbrooks.dc26.template.SlideScaffold
 import com.jzbrooks.dc26.theme.VgoColors
 import com.jzbrooks.dc26.vector.CubicTo
@@ -189,7 +188,7 @@ fun StoryboardBuilder.CurvesToArcsAlgorithm() {
                 }
 
                 Column(
-                    Modifier.width(840.dp).fillMaxHeight(),
+                    Modifier.weight(1f).fillMaxHeight(),
                     verticalArrangement = Arrangement.spacedBy(32.dp),
                 ) {
                     Text("how it works", style = MaterialTheme.typography.h4)
@@ -227,13 +226,5 @@ fun StoryboardBuilder.CurvesToArcsAlgorithm() {
                 }
             }
         }
-    }
-}
-
-@Composable
-private fun AlgorithmStep(label: String, detail: String) {
-    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        Text(label, style = MaterialTheme.typography.subtitle1, color = VgoColors.Azure)
-        Caption(detail)
     }
 }

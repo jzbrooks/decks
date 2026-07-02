@@ -48,14 +48,18 @@ private val BEFORE_XML = """
 """.trimIndent()
 
 private val AFTER_XML = """
-    <path android:pathData="M7.8,7.8L16.2,16.2 13.4,19.1 4.9,10.6Z"/>
+    <group>
+      <path android:pathData="M7.8,7.8L16.2,16.2 13.4,19.1 4.9,10.6Z"/>
+    </group>
 """.trimIndent()
 
 private val AFTER_XML_DISPLAY = """
-    <path
-        android:pathData="M7.8,7.8
-            L16.2,16.2 13.4,19.1
-            4.9,10.6Z"/>
+    <group>
+      <path
+          android:pathData="M7.8,7.8
+              L16.2,16.2 13.4,19.1
+              4.9,10.6Z"/>
+    </group>
 """.trimIndent()
 
 // The rectangle above with its rotation folded into the coordinates.
@@ -78,12 +82,12 @@ fun StoryboardBuilder.BakeTransformations() {
 
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween,
+                horizontalArrangement = Arrangement.spacedBy(96.dp),
                 modifier = Modifier.fillMaxSize()
             ) {
                 Column(
                     verticalArrangement = Arrangement.spacedBy(48.dp),
-                    modifier = Modifier.weight(2f)
+                    modifier = Modifier.weight(1f)
                 ) {
                     ProvideTextStyle(CodeTextStyle) {
                         val xml = transition.createChildTransition {
@@ -109,17 +113,17 @@ fun StoryboardBuilder.BakeTransformations() {
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(24.dp),
-                    modifier = Modifier.weight(1f)
                 ) {
                     PathCanvas(
                         commands = BAKED,
                         viewport = Rect(0f, 0f, 24f, 24f),
                         fill = VgoColors.PathFill,
                         modifier = Modifier
-                            .size(320.dp)
+                            .size(640.dp)
                             .clip(RoundedCornerShape(32.dp))
                             .background(VgoColors.Surface),
                     )
+                    Caption("pre-apply transformations to path data")
                 }
             }
         }

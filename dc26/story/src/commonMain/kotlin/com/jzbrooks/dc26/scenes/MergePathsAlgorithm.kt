@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -21,7 +20,7 @@ import androidx.compose.ui.graphics.Path as DrawPath
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.unit.dp
-import com.jzbrooks.dc26.template.Caption
+import com.jzbrooks.dc26.template.AlgorithmStep
 import com.jzbrooks.dc26.template.SlideScaffold
 import com.jzbrooks.dc26.theme.VgoColors
 import com.jzbrooks.dc26.vector.Close
@@ -123,14 +122,14 @@ fun StoryboardBuilder.MergePathsAlgorithm() {
                 }
 
                 Column(
-                    Modifier.width(840.dp).fillMaxHeight(),
+                    Modifier.weight(1f).fillMaxHeight(),
                     verticalArrangement = Arrangement.spacedBy(32.dp),
                 ) {
                     Text("how it works", style = MaterialTheme.typography.h4)
 
                     RevealEach(transition.createChildTransition { it.toValue() }) {
                         item(0) {
-                            AlgoStep(
+                            AlgorithmStep(
                                 label = "1. bounding-box check",
                                 detail = "Compare axis-aligned extents — O(1). " +
                                     "Disjoint boxes guarantee no intersection. " +
@@ -138,14 +137,14 @@ fun StoryboardBuilder.MergePathsAlgorithm() {
                             )
                         }
                         item(1) {
-                            AlgoStep(
+                            AlgorithmStep(
                                 label = "2. overlap isn't intersection",
                                 detail = "The shapes occupy opposite corners of their shared bounding box. " +
                                     "AABB overlap is a necessary condition for intersection — not sufficient.",
                             )
                         }
                         item(2) {
-                            AlgoStep(
+                            AlgorithmStep(
                                 label = "3. GJK on convex hulls",
                                 detail = "Tests whether the hulls actually intersect. More expensive, " +
                                     "but only runs when the fast check fails. " +
@@ -159,10 +158,3 @@ fun StoryboardBuilder.MergePathsAlgorithm() {
     }
 }
 
-@Composable
-private fun AlgoStep(label: String, detail: String) {
-    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        Text(label, style = MaterialTheme.typography.subtitle1, color = VgoColors.Azure)
-        Caption(detail)
-    }
-}

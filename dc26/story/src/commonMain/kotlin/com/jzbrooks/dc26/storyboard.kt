@@ -1,6 +1,7 @@
 package com.jzbrooks.dc26
 
 import com.jzbrooks.dc26.scenes.BakeTransformations
+import com.jzbrooks.dc26.scenes.BakeTransformationsAlgorithm
 import com.jzbrooks.dc26.scenes.Closing
 import com.jzbrooks.dc26.scenes.CommandVariant
 import com.jzbrooks.dc26.scenes.Conversion
@@ -19,6 +20,7 @@ import com.jzbrooks.dc26.scenes.MergePaths
 import com.jzbrooks.dc26.scenes.MergePathsAlgorithm
 import com.jzbrooks.dc26.scenes.OptimizationCategories
 import com.jzbrooks.dc26.scenes.Pipeline
+import com.jzbrooks.dc26.scenes.PrintIr
 import com.jzbrooks.dc26.scenes.R8Funnel
 import com.jzbrooks.dc26.scenes.SimplifyBezierAlgorithm
 import com.jzbrooks.dc26.scenes.SimplifyCommands
@@ -60,14 +62,19 @@ fun createStoryboard(): Storyboard {
             WhatIsVgo()
             Conversion(true)
             VgoHistory()
+            PrintIr()
+        }
+
+        section("How Paths Work") {
+            HowPathsWork()
         }
 
         section("Optimization Pipeline") {
-            HowPathsWork()
             OptimizationCategories()
             Pipeline()
             CommandVariant()
             BakeTransformations()
+            BakeTransformationsAlgorithm()
             SimplifyCommands()
             SimplifyBezierAlgorithm()
             CurvesToArcs()

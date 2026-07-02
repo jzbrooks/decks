@@ -87,7 +87,7 @@ fun StoryboardBuilder.UsingVgo() {
             }
 
             TerminalPopup(
-                visible = { it.toValue() < 2 },
+                visible = { true },
                 title = "icons — zsh",
             ) {
                 Text(
@@ -101,6 +101,17 @@ fun StoryboardBuilder.UsingVgo() {
 
                 transition.AnimatedVisibility(
                     visible = { it.toValue() >= 1 },
+                    enter = expandVertically() + fadeIn(),
+                    exit = fadeOut(),
+                ) {
+                    Column {
+                        Spacer(Modifier.height(32.dp))
+                        Text("> vgo --no-optimization --format iv icon.svg")
+                    }
+                }
+
+                transition.AnimatedVisibility(
+                    visible = { it.toValue() >= 2 },
                     enter = expandVertically() + fadeIn(),
                     exit = fadeOut(),
                 ) {

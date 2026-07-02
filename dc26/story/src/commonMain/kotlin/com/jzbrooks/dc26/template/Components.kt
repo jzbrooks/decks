@@ -2,7 +2,9 @@ package com.jzbrooks.dc26.template
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
@@ -84,4 +86,18 @@ fun Caption(text: String, modifier: Modifier = Modifier) {
         style = MaterialTheme.typography.body1,
         fontStyle = FontStyle.Italic,
     )
+}
+
+// A numbered step in a "how it works" walkthrough.
+@Composable
+fun AlgorithmStep(label: String, detail: String) {
+    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        Text(
+            label,
+            style = MaterialTheme.typography.body1,
+            fontWeight = FontWeight.SemiBold,
+            color = VgoColors.Azure,
+        )
+        Text(detail, style = MaterialTheme.typography.body2, color = VgoColors.Muted)
+    }
 }

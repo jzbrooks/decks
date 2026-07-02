@@ -216,7 +216,7 @@ fun StoryboardBuilder.MotivationNode() {
                         style = MaterialTheme.typography.body1,
                         color = VgoColors.Muted,
                     )
-                    Caption("issuetracker.google.com/issues/142460503")
+                    Caption("> If you get this error after pre-processing an SVG with SVGOMG…\nissuetracker.google.com/issues/142460503")
                 }
             }
         }

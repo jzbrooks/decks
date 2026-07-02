@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -19,7 +18,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.unit.dp
-import com.jzbrooks.dc26.template.Caption
+import com.jzbrooks.dc26.template.AlgorithmStep
 import com.jzbrooks.dc26.template.SlideScaffold
 import com.jzbrooks.dc26.theme.VgoColors
 import com.jzbrooks.dc26.vector.CubicTo
@@ -137,28 +136,28 @@ fun StoryboardBuilder.SimplifyBezierAlgorithm() {
                 }
 
                 Column(
-                    Modifier.width(840.dp).fillMaxHeight(),
+                    Modifier.weight(1f).fillMaxHeight(),
                     verticalArrangement = Arrangement.spacedBy(32.dp),
                 ) {
                     Text("how it works", style = MaterialTheme.typography.h4)
 
                     RevealEach(transition.createChildTransition { it.toValue() }) {
                         item(0) {
-                            BezierAlgorithmStep(
+                            AlgorithmStep(
                                 label = "1. draw the chord",
                                 detail = "In relative coordinates the chord runs from the origin to end. " +
                                     "Rotating it 90° gives the chord normal (a, b) = (−endY, endX).",
                             )
                         }
                         item(1) {
-                            BezierAlgorithmStep(
+                            AlgorithmStep(
                                 label = "2. normalise by chord length",
                                 detail = "d = 1 / (a² + b²). " +
                                     "If d is not finite the chord is zero-length — vgo skips the check.",
                             )
                         }
                         item(2) {
-                            BezierAlgorithmStep(
+                            AlgorithmStep(
                                 label = "3. project each control point",
                                 detail = "distance = √((a·cx + b·cy)² × d). " +
                                     "C1 ≈ ${d1.toCoordinateString(2)}, C2 ≈ ${d2.toCoordinateString(2)} " +
@@ -166,7 +165,7 @@ fun StoryboardBuilder.SimplifyBezierAlgorithm() {
                             )
                         }
                         item(3) {
-                            BezierAlgorithmStep(
+                            AlgorithmStep(
                                 label = "4. replace with LineTo",
                                 detail = "Both controls project within tolerance: the cubic is swapped " +
                                     "for a straight line and the command is shorter.",
@@ -179,10 +178,3 @@ fun StoryboardBuilder.SimplifyBezierAlgorithm() {
     }
 }
 
-@Composable
-private fun BezierAlgorithmStep(label: String, detail: String) {
-    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        Text(label, style = MaterialTheme.typography.subtitle1, color = VgoColors.Azure)
-        Caption(detail)
-    }
-}
