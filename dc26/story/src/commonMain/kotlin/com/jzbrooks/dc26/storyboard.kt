@@ -27,6 +27,7 @@ import com.jzbrooks.dc26.scenes.SimplifyCommands
 import com.jzbrooks.dc26.scenes.Title
 import com.jzbrooks.dc26.scenes.UsingVgo
 import com.jzbrooks.dc26.scenes.Vat
+import com.jzbrooks.dc26.scenes.VgoName
 import com.jzbrooks.dc26.scenes.WhatIsVgo
 import com.jzbrooks.dc26.theme.VgoTheme
 import dev.bnorm.storyboard.SceneFormat
@@ -57,12 +58,11 @@ fun createStoryboard(): Storyboard {
             R8Funnel()
             KotlinMultiplatformFunnel()
             LlvmFunnel()
+            VgoName()
         }
 
-        // TODO: introduce the vgo name (animate vector graphic optimizer to vgo, then show terminal peeking)
-        WhatIsVgo()
-
         section("What is vgo?") {
+            WhatIsVgo()
             Conversion(true)
             // TODO: Well, the IR approach worked out basically immediately. Dropped PDF for SVG on iOS 13
             PrintIr()
