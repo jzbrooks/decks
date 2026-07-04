@@ -44,8 +44,9 @@ fun createStoryboard(): Storyboard {
 
         MotivationVectorPain()
         MotivationNode()
-        MotivationCoffee()
-        MotivationTooling()
+//        MotivationCoffee()
+//        MotivationTooling()
+        // TODO: Goal, build a tool than can shrink PDF or vector drawable illustrations
 
         section("What are vector graphics, actually?") {
             HowGraphicsWork()
@@ -59,9 +60,10 @@ fun createStoryboard(): Storyboard {
         }
 
         section("What is vgo?") {
+            // TODO: introduce the vgo name (animate vector graphic optimizer to vgo, then show terminal peeking)
             WhatIsVgo()
             Conversion(true)
-            VgoHistory()
+            // TODO: Well, the IR approach worked out basically immediately. Dropped PDF for SVG on iOS 13
             PrintIr()
         }
 
