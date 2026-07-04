@@ -59,9 +59,10 @@ fun createStoryboard(): Storyboard {
             LlvmFunnel()
         }
 
+        // TODO: introduce the vgo name (animate vector graphic optimizer to vgo, then show terminal peeking)
+        WhatIsVgo()
+
         section("What is vgo?") {
-            // TODO: introduce the vgo name (animate vector graphic optimizer to vgo, then show terminal peeking)
-            WhatIsVgo()
             Conversion(true)
             // TODO: Well, the IR approach worked out basically immediately. Dropped PDF for SVG on iOS 13
             PrintIr()

@@ -16,6 +16,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.sp
+import com.jzbrooks.dc26.template.SlideScaffold
 import com.jzbrooks.dc26.template.Terminal
 import dev.bnorm.storyboard.StoryboardBuilder
 import dev.bnorm.storyboard.layout.template.SceneEnter
@@ -47,36 +48,38 @@ fun StoryboardBuilder.PrintIr() {
         enterTransition = SceneEnter(alignment = Alignment.CenterEnd),
         exitTransition = SceneExit(alignment = Alignment.CenterEnd),
     ) {
-        Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            Terminal(Modifier.fillMaxWidth(0.9f), title = "vgo — zsh") {
-                ProvideTextStyle(LocalTextStyle.current.copy(fontSize = 28.sp, lineHeight = 42.sp)) {
-                    Text(buildAnnotatedString {
-                        withStyle(SpanStyle(color = Muted)) { append("% ") }
-                        append("vgo --print-ir vgo/src/test/resources/simple_heart.xml")
-                    })
+        SlideScaffold {
+            Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                Terminal(Modifier.fillMaxWidth(0.9f), title = "vgo — zsh") {
+                    ProvideTextStyle(LocalTextStyle.current.copy(fontSize = 28.sp, lineHeight = 42.sp)) {
+                        Text(buildAnnotatedString {
+                            withStyle(SpanStyle(color = Muted)) { append("% ") }
+                            append("vgo --print-ir vgo/src/test/resources/simple_heart.xml")
+                        })
 
-                    Text(buildAnnotatedString {
-                        withStyle(SpanStyle(fontWeight = FontWeight.Bold)) { append("VectorDrawable") }
-                        withStyle(SpanStyle(color = Muted)) { append(" [vector] (100x100)") }
-                    })
+                        Text(buildAnnotatedString {
+                            withStyle(SpanStyle(fontWeight = FontWeight.Bold)) { append("VectorDrawable") }
+                            withStyle(SpanStyle(color = Muted)) { append(" [vector] (100x100)") }
+                        })
 
-                    Text(buildAnnotatedString {
-                        withStyle(SpanStyle(color = Muted)) { append("└── ") }
-                        withStyle(SpanStyle(fontWeight = FontWeight.Bold)) { append("Path") }
-                        withStyle(SpanStyle(color = Muted)) { append(" [path]") }
-                        append(" fill=")
-                        withStyle(SpanStyle(color = FillSwatch)) { append("■") }
-                        withStyle(SpanStyle(color = Amber)) { append(" #00000000") }
-                        append(" stroke=")
-                        withStyle(SpanStyle(color = StrokeSwatch)) { append("■") }
-                        withStyle(SpanStyle(color = Amber)) { append(" #ff0000") }
-                        append(" sw=1")
-                        withStyle(SpanStyle(color = Muted)) { append(" (11 cmds)") }
-                    })
+                        Text(buildAnnotatedString {
+                            withStyle(SpanStyle(color = Muted)) { append("└── ") }
+                            withStyle(SpanStyle(fontWeight = FontWeight.Bold)) { append("Path") }
+                            withStyle(SpanStyle(color = Muted)) { append(" [path]") }
+                            append(" fill=")
+                            withStyle(SpanStyle(color = FillSwatch)) { append("■") }
+                            withStyle(SpanStyle(color = Amber)) { append(" #00000000") }
+                            append(" stroke=")
+                            withStyle(SpanStyle(color = StrokeSwatch)) { append("■") }
+                            withStyle(SpanStyle(color = Amber)) { append(" #ff0000") }
+                            append(" sw=1")
+                            withStyle(SpanStyle(color = Muted)) { append(" (11 cmds)") }
+                        })
 
-                    for ((index, command) in COMMANDS.withIndex()) {
-                        val branch = if (index == COMMANDS.lastIndex) "└── " else "├── "
-                        Text(commandLine(branch, command.first, command.second))
+                        for ((index, command) in COMMANDS.withIndex()) {
+                            val branch = if (index == COMMANDS.lastIndex) "└── " else "├── "
+                            Text(commandLine(branch, command.first, command.second))
+                        }
                     }
                 }
             }
