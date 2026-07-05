@@ -60,7 +60,6 @@ fun createStoryboard(): Storyboard {
         section("What is vgo?") {
             WhatIsVgo()
             Conversion(true)
-            // TODO: Well, the IR approach worked out basically immediately. Dropped PDF for SVG on iOS 13
             PrintIr()
         }
 

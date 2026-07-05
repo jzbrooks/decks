@@ -21,6 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.unit.dp
+import com.jzbrooks.dc26.template.SlideScaffold
 import com.jzbrooks.dc26.theme.VgoColors
 import com.jzbrooks.deck.story.generated.resources.Res
 import com.jzbrooks.deck.story.generated.resources.vgo
@@ -53,28 +54,30 @@ fun StoryboardBuilder.VgoName() {
         enterTransition = SceneEnter(alignment = Alignment.CenterEnd),
         exitTransition = SceneExit(alignment = Alignment.CenterEnd),
     ) {
-        val tokens = transition.createChildTransition { name(crossed = it.toValue() >= 1) }
-        val showLogo = transition.createChildTransition { it.toValue() >= 2 }
+        SlideScaffold {
+            val tokens = transition.createChildTransition { name(crossed = it.toValue() >= 1) }
+            val showLogo = transition.createChildTransition { it.toValue() >= 2 }
 
-        Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            Box(
-                Modifier
-                    .background(Color.White, RoundedCornerShape(48.dp))
-                    .padding(horizontal = 80.dp, vertical = 48.dp),
-                contentAlignment = Alignment.Center,
-            ) {
-                showLogo.AnimatedContent(
-                    transitionSpec = { fadeIn() togetherWith fadeOut() },
-                ) { logo ->
-                    if (logo) {
-                        Image(
-                            painterResource(Res.drawable.vgo),
-                            contentDescription = "vgo logo",
-                            modifier = Modifier.width(440.dp),
-                        )
-                    } else {
-                        ProvideTextStyle(MaterialTheme.typography.h2) {
-                            MagicText(tokens)
+            Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                Box(
+                    Modifier
+                        .background(Color.White, RoundedCornerShape(48.dp))
+                        .padding(horizontal = 80.dp, vertical = 48.dp),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    showLogo.AnimatedContent(
+                        transitionSpec = { fadeIn() togetherWith fadeOut() },
+                    ) { logo ->
+                        if (logo) {
+                            Image(
+                                painterResource(Res.drawable.vgo),
+                                contentDescription = "vgo logo",
+                                modifier = Modifier.width(440.dp),
+                            )
+                        } else {
+                            ProvideTextStyle(MaterialTheme.typography.h2) {
+                                MagicText(tokens)
+                            }
                         }
                     }
                 }
