@@ -1,84 +1,38 @@
 package com.jzbrooks.dc26.scenes
 
-import androidx.compose.animation.core.createChildTransition
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.LocalTextStyle
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.ProvideTextStyle
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.jzbrooks.dc26.template.Caption
-import com.jzbrooks.dc26.template.GradientChip
 import com.jzbrooks.dc26.template.SlideScaffold
 import com.jzbrooks.dc26.template.Terminal
-import com.jzbrooks.dc26.theme.GradientText
 import com.jzbrooks.dc26.theme.VgoColors
+import com.jzbrooks.dc26.theme.VgoColors.Muted
 import com.jzbrooks.deck.story.generated.resources.Res
 import com.jzbrooks.deck.story.generated.resources.ic_add_a_profile_megaphone_image
 import com.jzbrooks.deck.story.generated.resources.ic_notification_permission
 import com.jzbrooks.deck.story.generated.resources.ic_onboarding
-import com.jzbrooks.deck.story.generated.resources.niche_grinder
 import dev.bnorm.storyboard.StoryboardBuilder
-import dev.bnorm.storyboard.layout.template.RevealEach
 import dev.bnorm.storyboard.layout.template.SceneEnter
 import dev.bnorm.storyboard.layout.template.SceneExit
 import dev.bnorm.storyboard.toValue
 import org.jetbrains.compose.resources.painterResource
-
-fun StoryboardBuilder.MotivationTooling() {
-    scene(
-        frameCount = 2,
-        enterTransition = SceneEnter(alignment = Alignment.CenterEnd),
-        exitTransition = SceneExit(alignment = Alignment.CenterEnd),
-    ) {
-        SlideScaffold {
-            Column(
-                Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.spacedBy(64.dp),
-            ) {
-                RevealEach(transition.createChildTransition { it.toValue() }) {
-                    item {
-                        Column(verticalArrangement = Arrangement.spacedBy(40.dp)) {
-                            GradientText(
-                                "Android tooling is great.",
-                                style = MaterialTheme.typography.h3,
-                            )
-                            Row(horizontalArrangement = Arrangement.spacedBy(24.dp)) {
-                                GradientChip("Android Studio")
-                                GradientChip("Gradle")
-                                GradientChip("Lint")
-                                GradientChip("ADB")
-                            }
-                        }
-                    }
-                    item {
-                        Text(
-                            "So workflow pain points stand out.",
-                            style = MaterialTheme.typography.h3,
-                            color = VgoColors.OnDark,
-                        )
-                    }
-                }
-            }
-        }
-    }
-}
 
 fun StoryboardBuilder.MotivationVectorPain() {
     scene(
@@ -223,41 +177,36 @@ fun StoryboardBuilder.MotivationNode() {
     }
 }
 
-fun StoryboardBuilder.MotivationCoffee() {
+fun StoryboardBuilder.MotivationMultipleFormats() {
     scene(
-        frameCount = 1,
+        frameCount = 2,
         enterTransition = SceneEnter(alignment = Alignment.CenterEnd),
         exitTransition = SceneExit(alignment = Alignment.CenterEnd),
     ) {
         SlideScaffold {
-            Row(
-                Modifier.fillMaxSize(),
-                horizontalArrangement = Arrangement.spacedBy(64.dp),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                Column(
-                    Modifier.weight(1f),
-                    verticalArrangement = Arrangement.spacedBy(32.dp),
-                ) {
-                    GradientText(
-                        "A great workflow disappears.",
-                        style = MaterialTheme.typography.h3,
-                    )
-                    Text(
-                        "You're less inclined to use the tools.",
-                        style = MaterialTheme.typography.body1,
-                        color = VgoColors.Muted,
-                    )
+            Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                Terminal(Modifier.fillMaxSize(0.7f), title = "app — zsh") {
+                    ProvideTextStyle(LocalTextStyle.current.copy(fontSize = 28.sp, lineHeight = 42.sp)) {
+                        Text(buildAnnotatedString {
+                            withStyle(SpanStyle(color = Muted)) { append("% ") }
+                            append("svgo main/res/drawable/network-error.xml")
+                        })
+
+                        transition.AnimatedVisibility(
+                            visible = { it.toValue() >= 1 },
+                            enter = expandVertically() + fadeIn(),
+                            exit = fadeOut(),
+                        ) {
+                            Column {
+                                Spacer(Modifier.height(32.dp))
+                                Text(buildAnnotatedString {
+                                    withStyle(SpanStyle(color = Muted)) { append("% ") }
+                                    append("svgo assets/network-error.pdf")
+                                })
+                            }
+                        }
+                    }
                 }
-                Image(
-                    painterResource(Res.drawable.niche_grinder),
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .weight(1f)
-                        .fillMaxHeight(0.7f)
-                        .clip(RoundedCornerShape(24.dp)),
-                )
             }
         }
     }

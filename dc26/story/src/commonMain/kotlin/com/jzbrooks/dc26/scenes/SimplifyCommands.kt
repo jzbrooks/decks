@@ -11,6 +11,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.ProvideTextStyle
 import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -92,7 +93,7 @@ fun StoryboardBuilder.SimplifyCommands() {
     }
 }
 
-@androidx.compose.runtime.Composable
+@Composable
 private fun InteractiveDegenerateCurve() {
     var control1 by remember { mutableStateOf(Point(9f, 5f)) }
     var control2 by remember { mutableStateOf(Point(15f, 19f)) }
@@ -137,7 +138,7 @@ private fun InteractiveDegenerateCurve() {
     }
 }
 
-@androidx.compose.runtime.Composable
+@Composable
 private fun SimplifyRow(pass: String, before: String, after: String) {
     Row(
         horizontalArrangement = Arrangement.spacedBy(32.dp),

@@ -9,15 +9,13 @@ import com.jzbrooks.dc26.scenes.CurvesToArcs
 import com.jzbrooks.dc26.scenes.CurvesToArcsAlgorithm
 import com.jzbrooks.dc26.scenes.KotlinMultiplatformFunnel
 import com.jzbrooks.dc26.scenes.LlvmFunnel
-import com.jzbrooks.dc26.scenes.MotivationCoffee
 import com.jzbrooks.dc26.scenes.MotivationNode
-import com.jzbrooks.dc26.scenes.MotivationTooling
 import com.jzbrooks.dc26.scenes.MotivationVectorPain
-import com.jzbrooks.dc26.scenes.VgoHistory
 import com.jzbrooks.dc26.scenes.HowGraphicsWork
 import com.jzbrooks.dc26.scenes.HowPathsWork
 import com.jzbrooks.dc26.scenes.MergePaths
 import com.jzbrooks.dc26.scenes.MergePathsAlgorithm
+import com.jzbrooks.dc26.scenes.MotivationMultipleFormats
 import com.jzbrooks.dc26.scenes.OptimizationCategories
 import com.jzbrooks.dc26.scenes.Pipeline
 import com.jzbrooks.dc26.scenes.PrintIr
@@ -45,9 +43,7 @@ fun createStoryboard(): Storyboard {
 
         MotivationVectorPain()
         MotivationNode()
-//        MotivationCoffee()
-//        MotivationTooling()
-        // TODO: Goal, build a tool than can shrink PDF or vector drawable illustrations
+        MotivationMultipleFormats()
 
         section("What are vector graphics, actually?") {
             HowGraphicsWork()

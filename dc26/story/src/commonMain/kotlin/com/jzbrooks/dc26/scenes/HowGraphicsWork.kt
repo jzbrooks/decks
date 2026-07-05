@@ -18,6 +18,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.ProvideTextStyle
 import androidx.compose.material.Slider
 import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.remember
@@ -128,7 +129,7 @@ private const val SAMPLES = 256
 private const val RADIUS_CELLS = 99.2f
 private const val MAX_ZOOM = 6f
 
-@androidx.compose.runtime.Composable
+@Composable
 private fun RasterCircle(zoom: Float) {
     Canvas(
         Modifier
@@ -177,7 +178,7 @@ private fun RasterCircle(zoom: Float) {
     }
 }
 
-@androidx.compose.runtime.Composable
+@Composable
 private fun VectorCircle(zoom: Float) {
     Canvas(
         Modifier
