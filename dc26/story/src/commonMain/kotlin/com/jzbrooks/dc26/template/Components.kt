@@ -5,7 +5,12 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -86,6 +91,26 @@ fun Caption(text: String, modifier: Modifier = Modifier) {
         style = MaterialTheme.typography.body1,
         fontStyle = FontStyle.Italic,
     )
+}
+
+// A quoted aside, set off with a vertical rule like a markdown blockquote.
+@Composable
+fun Blockquote(text: String, modifier: Modifier = Modifier) {
+    Row(modifier.height(IntrinsicSize.Min)) {
+        Box(
+            Modifier
+                .fillMaxHeight()
+                .width(4.dp)
+                .background(VgoColors.Muted, RoundedCornerShape(2.dp))
+        )
+        Text(
+            text,
+            modifier = Modifier.padding(start = 24.dp),
+            color = VgoColors.Muted,
+            style = MaterialTheme.typography.body1,
+            fontStyle = FontStyle.Italic,
+        )
+    }
 }
 
 // A numbered step in a "how it works" walkthrough.

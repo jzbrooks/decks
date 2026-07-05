@@ -107,7 +107,7 @@ fun StoryboardBuilder.SimplifyBezierAlgorithm() {
                             pathEffect = PathEffect.dashPathEffect(floatArrayOf(12f, 8f)),
                         )
 
-                        // Chord normal arrow from midpoint, direction (a, b) normalised.
+                        // Chord normal arrow from midpoint, direction (a, b) normalized.
                         val normalMag = sqrt(A * A + B * B)
                         val normalScale = 3f / normalMag  // 3 viewport units long
                         val mid = Point(START.x + REL_END.x * 0.5f, START.y + REL_END.y * 0.5f)
@@ -151,7 +151,7 @@ fun StoryboardBuilder.SimplifyBezierAlgorithm() {
                         }
                         item(1) {
                             AlgorithmStep(
-                                label = "2. normalise by chord length",
+                                label = "2. normalize by chord length",
                                 detail = "d = 1 / (a² + b²). " +
                                     "If d is not finite the chord is zero-length — vgo skips the check.",
                             )

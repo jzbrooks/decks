@@ -15,6 +15,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import com.jzbrooks.dc26.template.Caption
 import com.jzbrooks.dc26.template.TerminalPopup
@@ -81,7 +84,12 @@ fun StoryboardBuilder.Vat() {
                 visible = { it != Frame.End },
                 title = "boats — zsh",
             ) {
-                Text("> vat boat.svg")
+                Text(
+                    buildAnnotatedString {
+                        withStyle(SpanStyle(color = VgoColors.Muted)) { append("% ") }
+                        append("vat boat.svg")
+                    }
+                )
                 transition.AnimatedVisibility(
                     visible = { it.toValue() >= 1 },
                     enter = fadeIn() + expandVertically(),

@@ -17,6 +17,9 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import com.jzbrooks.dc26.template.Caption
 import com.jzbrooks.dc26.template.GradientChip
@@ -52,12 +55,18 @@ fun StoryboardBuilder.UsingVgo() {
                             GradientChip("CLI")
                             Column {
                                 Text(
-                                    text = "> brew tap jzbrooks/repo",
+                                    text = buildAnnotatedString {
+                                        withStyle(SpanStyle(color = VgoColors.Muted)) { append("% ") }
+                                        append("brew tap jzbrooks/repo")
+                                    },
                                     color = VgoColors.OnDark,
                                     style = MaterialTheme.typography.body1,
                                 )
                                 Text(
-                                    text = "> brew install vgo",
+                                    text = buildAnnotatedString {
+                                        withStyle(SpanStyle(color = VgoColors.Muted)) { append("% ") }
+                                        append("brew install vgo")
+                                    },
                                     color = VgoColors.OnDark,
                                     style = MaterialTheme.typography.body1,
                                 )
@@ -91,12 +100,17 @@ fun StoryboardBuilder.UsingVgo() {
                 title = "icons — zsh",
             ) {
                 Text(
-                    """
-                    > vgo -s icon.svg
-                    Size before: 2.80 KiB
-                    Size after: 1.02 KiB
-                    Percent saved: 63.6
-                    """.trimIndent()
+                    buildAnnotatedString {
+                        withStyle(SpanStyle(color = VgoColors.Muted)) { append("% ") }
+                        append(
+                            """
+                            vgo -s icon.svg
+                            Size before: 2.80 KiB
+                            Size after: 1.02 KiB
+                            Percent saved: 63.6
+                            """.trimIndent()
+                        )
+                    }
                 )
 
                 transition.AnimatedVisibility(
@@ -106,7 +120,12 @@ fun StoryboardBuilder.UsingVgo() {
                 ) {
                     Column {
                         Spacer(Modifier.height(32.dp))
-                        Text("> vgo --no-optimization --format iv icon.svg")
+                        Text(
+                            buildAnnotatedString {
+                                withStyle(SpanStyle(color = VgoColors.Muted)) { append("% ") }
+                                append("vgo --no-optimization --format iv icon.svg")
+                            }
+                        )
                     }
                 }
 
@@ -117,7 +136,12 @@ fun StoryboardBuilder.UsingVgo() {
                 ) {
                     Column {
                         Spacer(Modifier.height(32.dp))
-                        Text("> vgo --format iv icon.svg")
+                        Text(
+                            buildAnnotatedString {
+                                withStyle(SpanStyle(color = VgoColors.Muted)) { append("% ") }
+                                append("vgo --format iv icon.svg")
+                            }
+                        )
                     }
                 }
             }

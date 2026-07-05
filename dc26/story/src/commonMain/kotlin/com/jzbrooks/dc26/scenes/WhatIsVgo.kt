@@ -26,6 +26,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -74,12 +77,17 @@ fun StoryboardBuilder.WhatIsVgo() {
                     ) {
                         ProvideTextStyle(LocalTextStyle.current.copy(fontSize = 26.sp, lineHeight = 40.sp)) {
                             Text(
-                                """
-                                vgo -s icon.svg
-                                Size before: 2.80 KiB
-                                Size after: 1.02 KiB
-                                Percent saved: 63.6
-                                """.trimIndent()
+                                buildAnnotatedString {
+                                    withStyle(SpanStyle(color = VgoColors.Muted)) { append("% ") }
+                                    append(
+                                        """
+                                        vgo -s icon.svg
+                                        Size before: 2.80 KiB
+                                        Size after: 1.02 KiB
+                                        Percent saved: 63.6
+                                        """.trimIndent()
+                                    )
+                                }
                             )
                         }
                     }

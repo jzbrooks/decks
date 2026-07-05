@@ -41,27 +41,27 @@ import dev.bnorm.storyboard.toValue
 
 private enum class Traversal { TopDown, BottomUp }
 
-private class Pass(val name: String, val traversal: Traversal, val starred: Boolean = false)
+private class Transform(val name: String, val traversal: Traversal, val starred: Boolean = false)
 
-private val PASSES = listOf(
-    Pass("ConvertShapesToPaths", traversal = Traversal.TopDown),
-    Pass("RemoveTransparentPaths", traversal = Traversal.TopDown),
-    Pass("BakeTransformations", traversal = Traversal.TopDown, starred = true),
-    Pass("BreakoutImplicitCommands", traversal = Traversal.TopDown),
-    Pass("CommandVariant(Relative)", traversal = Traversal.TopDown, starred = true),
-    Pass("ConvertCurvesToArcs", traversal = Traversal.TopDown, starred = true),
-    Pass("SimplifyBezierCurveCommands", traversal = Traversal.TopDown, starred = true),
-    Pass("SimplifyLineCommands", traversal = Traversal.TopDown, starred = true),
-    Pass("RemoveRedundantCommands", traversal = Traversal.TopDown, starred = true),
-    Pass("CommandVariant(Compact)", traversal = Traversal.TopDown, starred = true),
-    Pass("Polycommands", traversal = Traversal.TopDown),
-    Pass("CollapseGroups", traversal = Traversal.BottomUp),
-    Pass("RemoveEmptyGroups", traversal = Traversal.BottomUp),
-    Pass("MergePaths", traversal = Traversal.BottomUp, starred = true),
+private val TRANSFORMATIONS = listOf(
+    Transform("ConvertShapesToPaths", traversal = Traversal.TopDown),
+    Transform("RemoveTransparentPaths", traversal = Traversal.TopDown),
+    Transform("BakeTransformations", traversal = Traversal.TopDown, starred = true),
+    Transform("BreakoutImplicitCommands", traversal = Traversal.TopDown),
+    Transform("CommandVariant(Relative)", traversal = Traversal.TopDown, starred = true),
+    Transform("ConvertCurvesToArcs", traversal = Traversal.TopDown, starred = true),
+    Transform("SimplifyBezierCurveCommands", traversal = Traversal.TopDown, starred = true),
+    Transform("SimplifyLineCommands", traversal = Traversal.TopDown, starred = true),
+    Transform("RemoveRedundantCommands", traversal = Traversal.TopDown, starred = true),
+    Transform("CommandVariant(Compact)", traversal = Traversal.TopDown, starred = true),
+    Transform("Polycommands", traversal = Traversal.TopDown),
+    Transform("CollapseGroups", traversal = Traversal.BottomUp),
+    Transform("RemoveEmptyGroups", traversal = Traversal.BottomUp),
+    Transform("MergePaths", traversal = Traversal.BottomUp, starred = true),
 )
 
-private val TOP_DOWN_PASSES = PASSES.filter { it.traversal == Traversal.TopDown }
-private val BOTTOM_UP_PASSES = PASSES.filter { it.traversal == Traversal.BottomUp }
+private val TOP_DOWN_TRANSFORMS = TRANSFORMATIONS.filter { it.traversal == Traversal.TopDown }
+private val BOTTOM_UP_TRANSFORMS = TRANSFORMATIONS.filter { it.traversal == Traversal.BottomUp }
 
 fun StoryboardBuilder.Pipeline() {
     scene(
@@ -87,14 +87,14 @@ fun StoryboardBuilder.Pipeline() {
                     Row(horizontalArrangement = Arrangement.spacedBy(32.dp)) {
                         PassCluster(
                             traversal = Traversal.TopDown,
-                            passes = TOP_DOWN_PASSES,
+                            transforms = TOP_DOWN_TRANSFORMS,
                             highlightStars = frame >= 1,
                             grouped = frame >= 2,
                         )
 
                         PassCluster(
                             traversal = Traversal.BottomUp,
-                            passes = BOTTOM_UP_PASSES,
+                            transforms = BOTTOM_UP_TRANSFORMS,
                             highlightStars = frame >= 1,
                             grouped = frame >= 2,
                         )
@@ -122,8 +122,8 @@ fun StoryboardBuilder.Pipeline() {
                     ) {
                         OutlinedChip("O(n)", color = VgoColors.Azure)
                         Caption(
-                            "${PASSES.size} passes, ${Traversal.entries.size} tree traversals — " +
-                                "cost scales with graphic elements, not pass count"
+                            "${TRANSFORMATIONS.size} transformations, ${Traversal.entries.size} tree traversals — " +
+                                "cost scales with graphic elements, not the number of transformations applied"
                         )
                     }
                 }
@@ -140,7 +140,7 @@ private fun Arrow() {
 @Composable
 private fun PassCluster(
     traversal: Traversal,
-    passes: List<Pass>,
+    transforms: List<Transform>,
     highlightStars: Boolean,
     grouped: Boolean,
 ) {
@@ -162,16 +162,16 @@ private fun PassCluster(
                 .padding(padding),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            for (pass in passes) {
-                PassPill(pass, highlightStars = highlightStars)
+            for (transform in transforms) {
+                TransformPill(transform, highlightStars = highlightStars)
             }
         }
     }
 }
 
 @Composable
-private fun PassPill(pass: Pass, highlightStars: Boolean) {
-    val highlighted = highlightStars && pass.starred
+private fun TransformPill(transform: Transform, highlightStars: Boolean) {
+    val highlighted = highlightStars && transform.starred
     val background by animateColorAsState(
         if (highlighted) VgoColors.Violet else VgoColors.Surface,
     )
@@ -181,7 +181,7 @@ private fun PassPill(pass: Pass, highlightStars: Boolean) {
             .padding(horizontal = 20.dp, vertical = 4.dp)
     ) {
         Text(
-            pass.name,
+            transform.name,
             fontSize = 26.sp,
             fontFamily = JetBrainsMono,
             fontWeight = if (highlighted) FontWeight.SemiBold else FontWeight.Normal,

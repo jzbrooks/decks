@@ -19,11 +19,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.jzbrooks.dc26.template.Caption
+import com.jzbrooks.dc26.template.Blockquote
 import com.jzbrooks.dc26.template.SlideScaffold
 import com.jzbrooks.dc26.template.Terminal
 import com.jzbrooks.dc26.theme.VgoColors
-import com.jzbrooks.dc26.theme.VgoColors.Muted
 import com.jzbrooks.deck.story.generated.resources.Res
 import com.jzbrooks.deck.story.generated.resources.ic_add_a_profile_megaphone_image
 import com.jzbrooks.deck.story.generated.resources.ic_notification_permission
@@ -135,19 +134,32 @@ fun StoryboardBuilder.MotivationNode() {
                     modifier = Modifier.weight(1f),
                     title = "nowinandroid — zsh",
                 ) {
-                    Text("> git log -1 377d3be", fontSize = 22.sp)
                     Text(
-                        """
-                        commit 377d3bef0cef20984dfab154bc2ad0c597b7c0b8
-                        Author: Simon Marquis <contact@simon-marquis.fr>
-                        Date:   Fri Jun  2 21:43:25 2023 +0000
-
-                            Optimize AVD to fix long vector paths Lint warning
-
-                            ...with SVGOM, but you'll have to check
-                            on Android Studio the AVD diff.
-                        """.trimIndent(),
-                        fontSize = 22.sp
+                        buildAnnotatedString {
+                            withStyle(SpanStyle(color = VgoColors.Muted)) { append("% ") }
+                            append("git log -1 377d3be")
+                        },
+                        fontSize = 22.sp,
+                    )
+                    Text(
+                        buildAnnotatedString {
+                            withStyle(SpanStyle(color = VgoColors.Amber)) {
+                                append("commit 377d3bef0cef20984dfab154bc2ad0c597b7c0b8")
+                            }
+                            append(
+                                """
+                                |
+                                |Author: Simon Marquis <contact@simon-marquis.fr>
+                                |Date:   Fri Jun  2 21:43:25 2023 +0000
+                                |
+                                |    Optimize AVD to fix long vector paths Lint warning
+                                |
+                                |    ...with SVGOM, but you'll have to check
+                                |    on Android Studio the AVD diff.
+                                """.trimMargin()
+                            )
+                        },
+                        fontSize = 22.sp,
                     )
                 }
 
@@ -170,7 +182,7 @@ fun StoryboardBuilder.MotivationNode() {
                         style = MaterialTheme.typography.body1,
                         color = VgoColors.Muted,
                     )
-                    Caption("> If you get this error after pre-processing an SVG with SVGOMG…\nissuetracker.google.com/issues/142460503")
+                    Blockquote("% If you get this error after pre-processing an SVG with SVGOMG…\nissuetracker.google.com/issues/142460503")
                 }
             }
         }
@@ -188,8 +200,8 @@ fun StoryboardBuilder.MotivationMultipleFormats() {
                 Terminal(Modifier.fillMaxSize(0.7f), title = "app — zsh") {
                     ProvideTextStyle(LocalTextStyle.current.copy(fontSize = 28.sp, lineHeight = 42.sp)) {
                         Text(buildAnnotatedString {
-                            withStyle(SpanStyle(color = Muted)) { append("% ") }
-                            append("svgo main/res/drawable/network-error.xml")
+                            withStyle(SpanStyle(color = VgoColors.Muted)) { append("% ") }
+                            append("svgo src/main/res/drawable/network-error.xml")
                         })
 
                         transition.AnimatedVisibility(
@@ -200,7 +212,7 @@ fun StoryboardBuilder.MotivationMultipleFormats() {
                             Column {
                                 Spacer(Modifier.height(32.dp))
                                 Text(buildAnnotatedString {
-                                    withStyle(SpanStyle(color = Muted)) { append("% ") }
+                                    withStyle(SpanStyle(color = VgoColors.Muted)) { append("% ") }
                                     append("svgo assets/network-error.pdf")
                                 })
                             }
