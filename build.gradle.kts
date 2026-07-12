@@ -22,10 +22,6 @@ allprojects {
         extensions.configure<KotlinMultiplatformExtension> {
             sourceSets.all {
                 languageSettings {
-                    enableLanguageFeature("ContextParameters")
-                    enableLanguageFeature("WhenGuards")
-                    enableLanguageFeature("MultiDollarInterpolation")
-
                     optIn("androidx.compose.animation.core.ExperimentalTransitionApi")
                     optIn("androidx.compose.animation.ExperimentalAnimationApi")
                     optIn("androidx.compose.animation.ExperimentalSharedTransitionApi")

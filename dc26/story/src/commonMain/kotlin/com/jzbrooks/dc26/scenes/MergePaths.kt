@@ -6,6 +6,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -89,6 +90,7 @@ fun StoryboardBuilder.MergePaths() {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(48.dp),
+                modifier = Modifier.fillMaxSize()
             ) {
                 PathCanvas(
                     commands = TRIANGLE,
@@ -152,9 +154,6 @@ fun StoryboardBuilder.MergePaths() {
                             ByteChip(MERGED_XML.length)
                             Caption("same paint + disjoint bounds = one path, two subpaths")
                         }
-
-                        frame >= 1 -> Caption("the bounding boxes don't intersect…")
-                        else -> Caption("two paths, identical paint")
                     }
                 }
             }

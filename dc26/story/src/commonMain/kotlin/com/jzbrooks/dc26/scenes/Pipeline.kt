@@ -65,7 +65,7 @@ private val BOTTOM_UP_TRANSFORMS = TRANSFORMATIONS.filter { it.traversal == Trav
 
 fun StoryboardBuilder.Pipeline() {
     scene(
-        frameCount = 4,
+        frameCount = 3,
         enterTransition = SceneEnter(alignment = Alignment.CenterEnd),
         exitTransition = SceneExit(alignment = Alignment.CenterEnd),
     ) {
@@ -112,7 +112,7 @@ fun StoryboardBuilder.Pipeline() {
                 }
 
                 AnimatedVisibility(
-                    visible = frame >= 3,
+                    visible = frame >= 2,
                     enter = fadeIn() + expandVertically(),
                     exit = fadeOut(),
                 ) {

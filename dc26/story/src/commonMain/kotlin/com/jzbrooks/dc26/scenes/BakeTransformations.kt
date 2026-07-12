@@ -8,9 +8,14 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ProvideTextStyle
 import androidx.compose.runtime.getValue
@@ -73,7 +78,7 @@ private val BAKED: List<PathCommand> = listOf(
 
 fun StoryboardBuilder.BakeTransformations() {
     scene(
-        frameCount = 3,
+        frameCount = 2,
         enterTransition = SceneEnter(alignment = Alignment.CenterEnd),
         exitTransition = SceneExit(alignment = Alignment.CenterEnd),
     ) {
@@ -86,18 +91,26 @@ fun StoryboardBuilder.BakeTransformations() {
                 modifier = Modifier.fillMaxSize()
             ) {
                 Column(
-                    verticalArrangement = Arrangement.spacedBy(48.dp),
+                    verticalArrangement = Arrangement.Center,
                     modifier = Modifier.weight(1f)
                 ) {
-                    ProvideTextStyle(CodeTextStyle) {
-                        val xml = transition.createChildTransition {
-                            (if (it.toValue() >= 1) AFTER_XML_DISPLAY else BEFORE_XML).style(DC26_XML)
+                    Column(
+                        verticalArrangement = Arrangement.Bottom,
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        ProvideTextStyle(CodeTextStyle) {
+                            val xml = transition.createChildTransition {
+                                (if (it.toValue() >= 1) AFTER_XML_DISPLAY else BEFORE_XML).style(DC26_XML)
+                            }
+                            MagicText(xml)
                         }
-                        MagicText(xml)
                     }
 
-                    AnimatedVisibility(visible = frame >= 2, enter = fadeIn(), exit = fadeOut()) {
-                        Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                    Column(
+                        verticalArrangement = Arrangement.Top,
+                        modifier = Modifier.padding(top = 48.dp).weight(1f)
+                    ) {
+                        AnimatedVisibility(visible = frame >= 1, enter = fadeIn(), exit = fadeOut()) {
                             Row(
                                 horizontalArrangement = Arrangement.spacedBy(32.dp),
                                 verticalAlignment = Alignment.CenterVertically,

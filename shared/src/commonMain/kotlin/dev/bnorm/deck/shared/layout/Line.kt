@@ -37,7 +37,7 @@ fun DecoratedScope.Line(
     Decoration(modifier) { layout ->
         val startRect = layout.getBoundingBox(startKey) ?: return@Decoration
         val endRect = layout.getBoundingBox(endKey) ?: return@Decoration
-        with(drawContext.canvas.nativeCanvas) {
+        with(drawContext.canvas.skiaCanvas) {
             val checkPoint = saveLayer(null, null)
 
             val startPosition = borderPosition(startRect, startAlignment, layoutDirection)
@@ -95,7 +95,7 @@ fun DecoratedScope.CubicLine(
     Decoration(modifier) { layout ->
         val startRect = layout.getBoundingBox(startKey) ?: return@Decoration
         val endRect = layout.getBoundingBox(endKey) ?: return@Decoration
-        with(drawContext.canvas.nativeCanvas) {
+        with(drawContext.canvas.skiaCanvas) {
             val checkPoint = saveLayer(null, null)
 
             val startPosition = borderPosition(startRect, startAlignment, layoutDirection)
