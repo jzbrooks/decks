@@ -1,5 +1,6 @@
 package com.jzbrooks.dc26.scenes
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.createChildTransition
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
@@ -8,9 +9,11 @@ import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -42,7 +45,7 @@ import kotlin.math.sqrt
 
 fun StoryboardBuilder.HowGraphicsWork() {
     scene(
-        frameCount = 3,
+        frameCount = 2,
         enterTransition = SceneEnter(alignment = Alignment.CenterEnd),
         exitTransition = SceneExit(alignment = Alignment.CenterEnd),
     ) {
@@ -53,8 +56,14 @@ fun StoryboardBuilder.HowGraphicsWork() {
                 horizontalArrangement = Arrangement.spacedBy(96.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                Column(verticalArrangement = Arrangement.spacedBy(32.dp)) {
-                    Row(horizontalArrangement = Arrangement.spacedBy(64.dp)) {
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(32.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                ) {
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(64.dp),
+                        modifier = Modifier.weight(1f)
+                    ) {
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally,
                             verticalArrangement = Arrangement.spacedBy(16.dp),
@@ -71,18 +80,28 @@ fun StoryboardBuilder.HowGraphicsWork() {
                         }
                     }
 
-                    Row(
-                        horizontalArrangement = Arrangement.spacedBy(32.dp),
-                        verticalAlignment = Alignment.CenterVertically,
+                    Box(
+                        modifier = Modifier.weight(.5f).padding(top = 48.dp),
                     ) {
-                        Text("zoom", color = VgoColors.Muted)
-                        Slider(
-                            value = zoom,
-                            onValueChange = { zoom = it },
-                            valueRange = 1f..6f,
-                            modifier = Modifier.width(560.dp),
-                        )
-                        Text("${(zoom * 10).toInt() / 10f}×", color = VgoColors.Muted)
+                        transition.AnimatedVisibility(
+                            visible = { it.toValue() >= 1 },
+                            enter = expandVertically() + fadeIn(),
+                            exit = fadeOut(),
+                        ) {
+                            Row(
+                                horizontalArrangement = Arrangement.spacedBy(32.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                            ) {
+                                Text("zoom", color = VgoColors.Muted)
+                                Slider(
+                                    value = zoom,
+                                    onValueChange = { zoom = it },
+                                    valueRange = 1f..6f,
+                                    modifier = Modifier.width(560.dp),
+                                )
+                                Text("${(zoom * 10).toInt() / 10f}×", color = VgoColors.Muted)
+                            }
+                        }
                     }
                 }
 
@@ -90,32 +109,25 @@ fun StoryboardBuilder.HowGraphicsWork() {
                     verticalArrangement = Arrangement.spacedBy(48.dp),
                     modifier = Modifier.fillMaxHeight()
                 ) {
-                    RevealEach(transition.createChildTransition { it.toValue() }) {
-                        item(
-                            index = 1,
-                            enterTransition = { fadeIn() + expandVertically() },
-                            exitTransition = { fadeOut() + shrinkVertically() },
-                        ) {
-                            Caption("rasters store samples;\nvectors store instructions")
-                        }
-                        item(
-                            index = 2,
-                            enterTransition = { fadeIn() + expandVertically() },
-                            exitTransition = { fadeOut() + shrinkVertically() },
-                        ) {
-                            Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-                                Caption("…and \"instructions\" are a scene graph:")
-                                ProvideTextStyle(CodeTextStyle) {
-                                    Text(
-                                        """
+                    Caption("rasters store samples;\nvectors store instructions")
+
+                    transition.AnimatedVisibility(
+                        visible = { it.toValue() >= 1 },
+                        enter = fadeIn() + expandVertically() ,
+                        exit = fadeOut() + shrinkVertically() ,
+                    ) {
+                        Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                            Caption("…and \"instructions\" are a scene graph:")
+                            ProvideTextStyle(CodeTextStyle) {
+                                Text(
+                                    """
                                         <svg>
                                          └─ <g transform="…">
                                              ├─ <path d="…"/>
                                              └─ <path d="…"/>
                                         """.trimIndent(),
-                                        color = VgoColors.OnDark,
-                                    )
-                                }
+                                    color = VgoColors.OnDark,
+                                )
                             }
                         }
                     }

@@ -91,7 +91,7 @@ fun StoryboardBuilder.KotlinMultiplatformFunnel() {
                     FunnelNode("Wasm"),
                     FunnelNode("Native"),
                 ),
-                caption = "one language — many targets",
+                caption = "one toolchain — many targets",
             )
         }
     }
