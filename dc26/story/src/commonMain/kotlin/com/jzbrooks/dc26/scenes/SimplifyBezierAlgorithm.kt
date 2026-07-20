@@ -38,7 +38,6 @@ import kotlin.math.sqrt
 private val REL_END = Point(16f, 0f)
 private val REL_C1 = Point(4f, -2.5f)
 private val REL_C2 = Point(12f, 2.5f)
-private const val TOLERANCE = 3.0f
 
 // Absolute positions for drawing — offset to center the curve in the viewport.
 private val START = Point(4f, 13f)
@@ -161,7 +160,7 @@ fun StoryboardBuilder.SimplifyBezierAlgorithm() {
                                 label = "3. project each control point",
                                 detail = "distance = √((a·cx + b·cy)² × d). " +
                                     "C1 ≈ ${d1.toCoordinateString(2)}, C2 ≈ ${d2.toCoordinateString(2)} " +
-                                    "— both ≤ ${TOLERANCE.toCoordinateString(2)}.",
+                                    "— both ≤ 1e-3.",
                             )
                         }
                         item(3) {
