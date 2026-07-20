@@ -25,10 +25,9 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "deck.jzbrooks.com"
+rootProject.name = "jzbrooks-decks"
 
 includeBuild("storyboard")
 
-include(":deck.jzbrooks.com")
 include(":dc26:story")
 include(":shared")
