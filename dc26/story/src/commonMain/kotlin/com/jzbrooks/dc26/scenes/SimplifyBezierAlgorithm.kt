@@ -36,8 +36,8 @@ import kotlin.math.sqrt
 
 // Relative endpoint and control points, matching how vgo sees the command.
 private val REL_END = Point(16f, 0f)
-private val REL_C1 = Point(4f, -2.5f)
-private val REL_C2 = Point(12f, 2.5f)
+private val REL_C1 = Point(4f, -0.0005f)
+private val REL_C2 = Point(12f, 0.00075f)
 
 // Absolute positions for drawing — offset to center the curve in the viewport.
 private val START = Point(4f, 13f)
@@ -47,7 +47,8 @@ private val C2 = START + REL_C2
 private val VIEWPORT = Rect(0f, 0f, 24f, 24f)
 
 // Mirror of vgo's isStraightLine(): a = −endY, b = endX, d = 1/(a²+b²).
-// Distance of a relative control point from the chord = √((a·cx + b·cy)² × d).
+// Distance of a relative control point from the chord =
+// |a·cx + b·cy| / √(a²+b²) = √((a·cx + b·cy)² × d).
 private val A = -REL_END.y
 private val B = REL_END.x
 private val D = 1f / (A * A + B * B)
@@ -144,23 +145,23 @@ fun StoryboardBuilder.SimplifyBezierAlgorithm() {
                         item(0) {
                             AlgorithmStep(
                                 label = "1. draw the chord",
-                                detail = "In relative coordinates the chord runs from the origin to end. " +
-                                    "Rotating it 90° gives the chord normal (a, b) = (−endY, endX).",
+                                detail = "The relative chord is e = (16, 0). Rotating it 90° gives " +
+                                    "the normal n = (a, b) = (−eᵧ, eₓ) = (0, 16).",
                             )
                         }
                         item(1) {
                             AlgorithmStep(
                                 label = "2. normalize by chord length",
-                                detail = "d = 1 / (a² + b²). " +
+                                detail = "d = 1 / ‖n‖² = 1 / (a² + b²) " +
                                     "If d is not finite the chord is zero-length — vgo skips the check.",
                             )
                         }
                         item(2) {
                             AlgorithmStep(
                                 label = "3. project each control point",
-                                detail = "distance = √((a·cx + b·cy)² × d). " +
-                                    "C1 ≈ ${d1.toCoordinateString(2)}, C2 ≈ ${d2.toCoordinateString(2)} " +
-                                    "— both ≤ 1e-3.",
+                                detail = "distance(c, chord) = |n · c| √d. " +
+                                    "C₁ = ${d1.toCoordinateString(5)}, C₂ = ${d2.toCoordinateString(5)} " +
+                                    "— both ≤ 10⁻³.",
                             )
                         }
                         item(3) {
@@ -176,4 +177,3 @@ fun StoryboardBuilder.SimplifyBezierAlgorithm() {
         }
     }
 }
-
