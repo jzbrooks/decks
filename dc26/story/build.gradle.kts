@@ -1,14 +1,19 @@
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 
 plugins {
-    kotlin("multiplatform")
-    kotlin("plugin.serialization")
-    kotlin("plugin.compose")
-    id("org.jetbrains.compose")
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.compose)
+    alias(libs.plugins.ktlint)
 }
 
-group = "com.jzbrooks.deck"
-version = "1.0-SNAPSHOT"
+ktlint {
+    version.set(libs.versions.ktlint.cli)
+
+    filter {
+        exclude { it.file.path.contains("/build/generated/") }
+    }
+}
 
 kotlin {
     jvm()
@@ -23,34 +28,39 @@ kotlin {
         }
     }
 
+    compilerOptions {
+        val runningFromIdea =
+            System.getProperty("idea.active") == "true" ||
+                System.getProperty("idea.sync.active") == "true"
+        allWarningsAsErrors.set(!runningFromIdea)
+        extraWarnings.set(!runningFromIdea)
+
+        optIn.addAll(
+            "androidx.compose.animation.core.ExperimentalTransitionApi",
+            "androidx.compose.animation.ExperimentalAnimationApi",
+            "org.jetbrains.compose.resources.ExperimentalResourceApi",
+        )
+    }
+
     sourceSets {
-        all {
-            languageSettings {
-                enableLanguageFeature("MultiDollarInterpolation")
-
-                optIn("androidx.compose.animation.core.ExperimentalTransitionApi")
-                optIn("androidx.compose.animation.ExperimentalAnimationApi")
-                optIn("androidx.compose.animation.ExperimentalSharedTransitionApi")
-                optIn("org.jetbrains.compose.resources.ExperimentalResourceApi")
-            }
-        }
-
         commonMain {
             dependencies {
                 implementation(project(":shared"))
 
-                implementation("org.jetbrains.compose.runtime:runtime:1.10.1")
-                implementation("org.jetbrains.compose.foundation:foundation:1.10.1")
-                implementation("org.jetbrains.compose.material:material:1.10.1")
-                api("org.jetbrains.compose.components:components-resources:1.10.1")
+                implementation(libs.compose.runtime)
+                implementation(libs.compose.foundation)
+                implementation(libs.compose.material)
+                implementation(libs.compose.components.resources)
 
-                api("dev.bnorm.storyboard:storyboard:0.1.0-alpha03")
-                api("dev.bnorm.storyboard:storyboard-easel:0.1.0-alpha03")
-                api("dev.bnorm.storyboard:storyboard-layout:0.1.0-alpha03")
-                api("dev.bnorm.storyboard:storyboard-text:0.1.0-alpha03")
-
-                implementation("io.github.petertrr:kotlin-multiplatform-diff:0.7.0")
+                implementation(libs.storyboard)
+                implementation(libs.storyboard.easel)
+                implementation(libs.storyboard.layout)
+                implementation(libs.storyboard.text)
             }
         }
     }
+}
+
+compose.resources {
+    packageOfResClass = "com.jzbrooks.dc26.resources"
 }

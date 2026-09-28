@@ -1,13 +1,10 @@
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 
 plugins {
-    kotlin("multiplatform")
-    kotlin("plugin.compose")
-    id("org.jetbrains.compose")
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.compose)
 }
-
-group = "dev.bnorm.deck"
-version = "1.0-SNAPSHOT"
 
 kotlin {
     jvm()
@@ -17,41 +14,48 @@ kotlin {
         browser()
     }
 
+    compilerOptions {
+        optIn.addAll(
+            "androidx.compose.animation.core.ExperimentalTransitionApi",
+            "androidx.compose.animation.ExperimentalAnimationApi",
+            "androidx.compose.animation.ExperimentalSharedTransitionApi",
+            "org.jetbrains.compose.resources.ExperimentalResourceApi",
+        )
+    }
+
     sourceSets {
         commonMain {
             dependencies {
-                api(compose.runtime)
-                api(compose.foundation)
-                api(compose.material)
-                api(compose.components.resources)
-                api("org.jetbrains.compose.material:material-icons-core:1.7.3")
+                api(libs.compose.runtime)
+                api(libs.compose.foundation)
+                api(libs.compose.material)
+                api(libs.compose.components.resources)
+                api(libs.compose.material.icons.core)
 
-                api("dev.bnorm.storyboard:storyboard:0.1.0-alpha03")
-                api("dev.bnorm.storyboard:storyboard-easel:0.1.0-alpha03")
-                api("dev.bnorm.storyboard:storyboard-text:0.1.0-alpha03")
+                api(libs.storyboard)
+                api(libs.storyboard.easel)
+                api(libs.storyboard.text)
 
-                api(dependencies.platform("io.ktor:ktor-bom:3.1.2"))
-                api(dependencies.platform("org.jetbrains.kotlinx:kotlinx-coroutines-bom:1.10.2"))
+                api(project.dependencies.platform(libs.ktor.bom))
+                api(project.dependencies.platform(libs.kotlinx.coroutines.bom))
 
-                api("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.1")
-                api("io.ktor:ktor-client-core")
-                implementation("io.ktor:ktor-client-auth")
-                implementation("io.ktor:ktor-client-content-negotiation")
-                implementation("io.ktor:ktor-serialization-kotlinx-json")
+                api(libs.kotlinx.serialization.json)
+                api(libs.ktor.client.core)
+                implementation(libs.ktor.client.auth)
+                implementation(libs.ktor.client.content.negotiation)
+                implementation(libs.ktor.serialization.kotlinx.json)
             }
         }
         jvmMain {
             dependencies {
                 api(compose.desktop.currentOs)
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-debug")
-                 // TODO KTOR-8409
-                // implementation("io.ktor:ktor-client-okhttp")
-                implementation("io.ktor:ktor-client-cio")
+                implementation(libs.kotlinx.coroutines.debug)
+                implementation(libs.ktor.client.cio)
             }
         }
         wasmJsMain {
             dependencies {
-                implementation("io.ktor:ktor-client-js")
+                implementation(libs.ktor.client.js)
             }
         }
     }
@@ -59,4 +63,5 @@ kotlin {
 
 compose.resources {
     publicResClass = true
+    packageOfResClass = "dev.bnorm.deck.shared.generated.resources"
 }
